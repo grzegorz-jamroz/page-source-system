@@ -1,53 +1,29 @@
-# Html Creator
+# Page Source System
 
 ## Description
 
-Library allow to generate html for React pages readable by seo robots.
+Library generate html readable by seo robots and api json for React page.
 
 ## Instalation
 
 ```
-composer require grzegorz-jamroz/html-creator
+composer require grzegorz-jamroz/page-source-system
 ```
 
 ## Usage
 
 ```php
-use HtmlCreator\ContentBuilder;
-use HtmlCreator\Helmet;
-use HtmlCreator\PageBuilder;use HtmlCreator\PageFactory;
+use PageSourceSystem\Generator\PageHtmlGenerator;
+use PageSourceSystem\Storage\ComponentInfoStorage;
+use PageSourceSystem\Utility\Asset;
+use PageSourceSystem\Domain\Page;
 
-$data = [
-    'seo' => [],
-    'header' => 'Page title',
-    'navbar' => [
-        'items' => [
-            [
-                'name' => 'Home',
-                'url' => '/home',
-            ],
-            [
-                'name' => 'About',
-                'url' => '/about',
-            ],
-            [
-                'name' => 'Contact',
-                'url' => '/contact',
-            ],
-        ],
-    ],
-    'sections' => [],
-    'footer' => [
-        'text' => 'Copyright ©'
-    ],
-];
-
-$pageBuilder = new PageBuilder(
-    'en',
-    '/path/to/your/app.js',
-    '/path/to/your/styles.css',
-    Helmet::createFromArray($data['seo'] ??= []),
-    ContentBuilder::createFromArray($data),
-);
-$html = (new PageFactory($pageBuilder))->getHtml();
+(new PageHtmlGenerator(
+    Page::createFromArray([]),
+    new ComponentInfoStorage('path/to/your/app/data'),
+    new Asset('path/to/your/js/file', 'file-name', 'js'),
+    new Asset('path/to/your/css/file', 'file-name', 'css'),
+    'path/to/your/app/data',
+    'path/to/your/render/data',
+))->generate();
 ```

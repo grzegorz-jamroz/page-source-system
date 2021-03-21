@@ -49,7 +49,7 @@ class Page implements \JsonSerializable, ArrayConstructable
         return $this->components;
     }
 
-    public static function createFromArray(array $data): ArrayConstructable
+    public static function createFromArray(array $data): self
     {
         return new self(
             Transform::toString($data['uuid'] ??= ''),
