@@ -4,24 +4,29 @@ declare(strict_types=1);
 
 namespace PageSourceSystem\Storage;
 
+use SimpleStorageSystem\Storage\AbstractJsonData;
 use SimpleStorageSystem\Storage\HtmlData;
 use SimpleStorageSystem\Utilities\Explorer;
 
-class PageHtmlStorage extends HtmlData
+class PageJsonStorage extends AbstractJsonData
 {
     public function __construct(
         private string $directory,
         private string $language,
-        private string $fileName
+        private string $fileName,
     ) {
         parent::__construct($this->getFilename());
     }
 
     private function getFilename(): string
     {
-        $directory = sprintf('%s/%s/html', $this->directory, $this->language);
+        $directory = sprintf('%s/%s/json', $this->directory, $this->language);
         Explorer::createDirectoryIfNotExists($directory);
-
-        return sprintf('%s/%s.html', $directory, $this->fileName);
+        
+        return sprintf(
+            '%s/%s.json',
+            $directory,
+            $this->fileName
+        );
     }
 }

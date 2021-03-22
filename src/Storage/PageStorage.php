@@ -13,7 +13,7 @@ class PageStorage extends AbstractJsonData
     public function __construct(
         private string $directory,
         private string $language,
-        private string $uuid,
+        private string $fileName,
     ) {
         parent::__construct($this->getFilename());
     }
@@ -23,7 +23,7 @@ class PageStorage extends AbstractJsonData
         return sprintf(
             '%s/%s.json',
             $this->getDirectory(),
-            $this->uuid
+            $this->fileName
         );
     }
 
@@ -37,11 +37,11 @@ class PageStorage extends AbstractJsonData
         $files = array_values($files);
 
         return array_map(function (string $file) {
-            $uuid = str_replace('.json', '', $file);
+            $fileName = str_replace('.json', '', $file);
             $storage = new PageStorage(
                 $this->directory,
                 $this->language,
-                $uuid,
+                $fileName,
             );
 
             return Page::createFromArray($storage->read());
