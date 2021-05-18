@@ -117,18 +117,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/grzegorz-jamroz/page-source-components.git",
-                "reference": "c076a4338fde4068fb7ff37bf36903d54a1af22c"
+                "reference": "0cbba92428f5f9428c2b0aaa5367ba731c7501e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/grzegorz-jamroz/page-source-components/zipball/c076a4338fde4068fb7ff37bf36903d54a1af22c",
-                "reference": "c076a4338fde4068fb7ff37bf36903d54a1af22c",
+                "url": "https://api.github.com/repos/grzegorz-jamroz/page-source-components/zipball/0cbba92428f5f9428c2b0aaa5367ba731c7501e8",
+                "reference": "0cbba92428f5f9428c2b0aaa5367ba731c7501e8",
                 "shasum": ""
             },
             "require": {
                 "doctrine/collections": "^1.6",
                 "ext-json": "*",
-                "grzegorz-jamroz/php-common": "^0.0.2"
+                "grzegorz-jamroz/php-common": "^0.0.3"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.0",
@@ -151,20 +151,20 @@
                 "issues": "https://github.com/grzegorz-jamroz/page-source-components/issues",
                 "source": "https://github.com/grzegorz-jamroz/page-source-components/tree/master"
             },
-            "time": "2021-05-18T19:52:42+00:00"
+            "time": "2021-05-18T20:28:48+00:00"
         },
         {
             "name": "grzegorz-jamroz/php-common",
-            "version": "0.0.2",
+            "version": "0.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/grzegorz-jamroz/php-common.git",
-                "reference": "9fbd1e9738a134cd0af02da6eabce738f957e9ce"
+                "reference": "ae344efb051615850e1c9348c0714dcb35720577"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/grzegorz-jamroz/php-common/zipball/9fbd1e9738a134cd0af02da6eabce738f957e9ce",
-                "reference": "9fbd1e9738a134cd0af02da6eabce738f957e9ce",
+                "url": "https://api.github.com/repos/grzegorz-jamroz/php-common/zipball/ae344efb051615850e1c9348c0714dcb35720577",
+                "reference": "ae344efb051615850e1c9348c0714dcb35720577",
                 "shasum": ""
             },
             "require": {
@@ -189,9 +189,9 @@
             "homepage": "https://rockujemy.pl",
             "support": {
                 "issues": "https://github.com/grzegorz-jamroz/php-common/issues",
-                "source": "https://github.com/grzegorz-jamroz/php-common/tree/0.0.2"
+                "source": "https://github.com/grzegorz-jamroz/php-common/tree/0.0.3"
             },
-            "time": "2021-05-18T19:40:59+00:00"
+            "time": "2021-05-18T20:22:45+00:00"
         },
         {
             "name": "grzegorz-jamroz/plain-data-transformer",
