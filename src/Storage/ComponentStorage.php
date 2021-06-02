@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PageSourceSystem\Storage;
 
 use Ifrost\PageSourceComponents\ComponentCollection;
-use Ifrost\PageSourceComponents\ComponentInterface;
+use SimpleStorageSystem\Document\Exception\FileNotExists;
 use SimpleStorageSystem\Storage\AbstractJsonData;
 use SimpleStorageSystem\Utilities\Explorer;
 
@@ -29,23 +29,12 @@ class ComponentStorage extends AbstractJsonData
         return sprintf('%s/%s.json', $directory, $this->fileName);
     }
 
-    public function getComponents(): ComponentCollection
+    /**
+     * @return array<string, mixed>
+     * @throws FileNotExists
+     */
+    public function getComponent(): array
     {
-        if (!isset($this->components)) {
-            $this->components = new ComponentCollection($this->read());
-        }
-
-        return $this->components;
-    }
-
-    public function getComponent(string $typename): ComponentInterface
-    {
-        $components = $this->getComponents();
-
-        if (!$components->containsKey($typename)) {
-            throw new \Exception(sprintf('Component %s not exists.', $typename));
-        }
-
-        return $components->getComponent($typename);
+        return $this->reader->read();
     }
 }
