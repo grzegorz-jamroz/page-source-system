@@ -4,29 +4,24 @@ declare(strict_types=1);
 
 namespace PageSourceSystem\Storage;
 
-use Ifrost\PageSourceComponents\ComponentCollection;
 use SimpleStorageSystem\Document\Exception\FileNotExists;
 use SimpleStorageSystem\Storage\AbstractJsonData;
 use SimpleStorageSystem\Utilities\Explorer;
 
 class ComponentStorage extends AbstractJsonData
 {
-    private ComponentCollection $components;
-
     public function __construct(
         private string $directory,
-        private string $language,
+        string $language,
         private string $fileName,
     ) {
+        $this->directory = self::getDirectory($directory, $language);
         parent::__construct($this->getFilename());
     }
 
     private function getFilename(): string
     {
-        $directory = sprintf('%s/%s/component', $this->directory, $this->language);
-        Explorer::createDirectoryIfNotExists($directory);
-
-        return sprintf('%s/%s.json', $directory, $this->fileName);
+        return sprintf('%s/%s.json', $this->directory, $this->fileName);
     }
 
     /**
@@ -36,5 +31,15 @@ class ComponentStorage extends AbstractJsonData
     public function getComponent(): array
     {
         return $this->reader->read();
+    }
+
+    public static function getDirectory(
+        string $directory,
+        string $language
+    ): string {
+        $directory = sprintf('%s/%s/component', $directory, $language);
+        Explorer::createDirectoryIfNotExists($directory);
+
+        return $directory;
     }
 }
