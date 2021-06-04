@@ -28,7 +28,7 @@ class ComponentStorage extends AbstractJsonData
      * @return array<string, mixed>
      * @throws FileNotExists
      */
-    public function getComponent(): array
+    public function getComponentData(): array
     {
         return $this->reader->read();
     }

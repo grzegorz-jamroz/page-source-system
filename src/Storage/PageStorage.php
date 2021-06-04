@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PageSourceSystem\Storage;
 
 use PageSourceSystem\Domain\Page;
+use SimpleStorageSystem\Document\Exception\FileNotExists;
 use SimpleStorageSystem\Storage\AbstractJsonData;
 use SimpleStorageSystem\Utilities\Explorer;
 
@@ -18,17 +19,17 @@ class PageStorage extends AbstractJsonData
         parent::__construct($this->getFilename());
     }
 
-    private function getFilename(): string
+    /**
+     * @return array<string, mixed>
+     * @throws FileNotExists
+     */
+    public function getPageData(): array
     {
-        return sprintf(
-            '%s/%s.json',
-            $this->getDirectory(),
-            $this->fileName
-        );
+        return $this->reader->read();
     }
 
     /**
-     * @return array|Page[]
+     * @return array<int, Page>
      */
     public function getAllPages(): array
     {
@@ -46,6 +47,15 @@ class PageStorage extends AbstractJsonData
 
             return Page::createFromArray($storage->read());
         }, $files);
+    }
+
+    private function getFilename(): string
+    {
+        return sprintf(
+            '%s/%s.json',
+            $this->getDirectory(),
+            $this->fileName
+        );
     }
 
     private function getDirectory(): string
