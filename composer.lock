@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2eb8650238188e0cfb05223844b7f7e0",
+    "content-hash": "1e33bc096e700a0d1c76cda0cac28719",
     "packages": [
         {
             "name": "doctrine/collections",
@@ -230,16 +230,16 @@
         },
         {
             "name": "grzegorz-jamroz/simple-storage-system",
-            "version": "0.0.5",
+            "version": "0.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/grzegorz-jamroz/simple-storage-system.git",
-                "reference": "588109bae6295982e2cd425bf47a14f8273b6216"
+                "reference": "2d7997729c3961f0c57f34f4981e069b9907b97f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/grzegorz-jamroz/simple-storage-system/zipball/588109bae6295982e2cd425bf47a14f8273b6216",
-                "reference": "588109bae6295982e2cd425bf47a14f8273b6216",
+                "url": "https://api.github.com/repos/grzegorz-jamroz/simple-storage-system/zipball/2d7997729c3961f0c57f34f4981e069b9907b97f",
+                "reference": "2d7997729c3961f0c57f34f4981e069b9907b97f",
                 "shasum": ""
             },
             "require": {
@@ -259,9 +259,9 @@
             "description": "Library contains interfaces and basic implementation of JSON storage.",
             "support": {
                 "issues": "https://github.com/grzegorz-jamroz/simple-storage-system/issues",
-                "source": "https://github.com/grzegorz-jamroz/simple-storage-system/tree/0.0.5"
+                "source": "https://github.com/grzegorz-jamroz/simple-storage-system/tree/0.0.6"
             },
-            "time": "2021-06-04T06:55:13+00:00"
+            "time": "2021-06-04T07:05:41+00:00"
         }
     ],
     "packages-dev": [
