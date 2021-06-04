@@ -22,7 +22,8 @@ class SettingsStorage extends AbstractJsonData
         return sprintf('%s/%s.json', $this->directory, $this->fileName);
     }
 
-    public static function getDirectory(string $directory): string {
+    public static function getDirectory(string $directory): string
+    {
         $directory = sprintf('%s/settings', $directory);
         Explorer::createDirectoryIfNotExists($directory);
 

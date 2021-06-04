@@ -137,12 +137,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/grzegorz-jamroz/html-creator.git",
-                "reference": "60188393e2405b055254c2d81f8130886f99f1ba"
+                "reference": "20b4762f0a5ae7bb48aa790c915c8a0dcef9b82b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/grzegorz-jamroz/html-creator/zipball/60188393e2405b055254c2d81f8130886f99f1ba",
-                "reference": "60188393e2405b055254c2d81f8130886f99f1ba",
+                "url": "https://api.github.com/repos/grzegorz-jamroz/html-creator/zipball/20b4762f0a5ae7bb48aa790c915c8a0dcef9b82b",
+                "reference": "20b4762f0a5ae7bb48aa790c915c8a0dcef9b82b",
                 "shasum": ""
             },
             "require": {
@@ -166,7 +166,7 @@
                 "issues": "https://github.com/grzegorz-jamroz/html-creator/issues",
                 "source": "https://github.com/grzegorz-jamroz/html-creator/tree/master"
             },
-            "time": "2021-06-04T13:48:12+00:00"
+            "time": "2021-06-04T14:20:53+00:00"
         },
         {
             "name": "grzegorz-jamroz/page-source-components",

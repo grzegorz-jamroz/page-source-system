@@ -13,7 +13,6 @@ use HtmlCreator\PageFactory;
 use PageSourceSystem\Domain\Header;
 use PageSourceSystem\Domain\Page;
 use PageSourceSystem\Repository\ComponentRepository;
-use PageSourceSystem\Storage\ComponentStorage;
 use PageSourceSystem\Storage\PageHtmlStorage;
 use PageSourceSystem\Utility\Asset;
 use PlainDataTransformer\Transform;
@@ -38,7 +37,7 @@ class PageHtmlGenerator implements GeneratorInterface
     private array $mainComponents;
 
     /**
-     * @var array<int, array>
+     * @var array<string, mixed>
      */
     private array $footer;
 
@@ -98,23 +97,9 @@ class PageHtmlGenerator implements GeneratorInterface
 
     private function setSeo(): void
     {
-        $uuid = $this->page->getSeoUuid();
-        $language = $this->page->getLanguage();
-        $this->seo = $this->getComponentData(
-            $language,
-            $uuid
+        $this->seo = $this->componentRepository->getComponentData(
+            $this->page->getSeoUuid()
         );
-    }
-
-    private function getComponentData(
-        string $language,
-        string $uuid
-    ): array {
-        return (new ComponentStorage(
-            $this->appDataDir,
-            $language,
-            $uuid,
-        ))->read();
     }
 
     private function setElements(): void
@@ -127,27 +112,28 @@ class PageHtmlGenerator implements GeneratorInterface
             /** @var ElementInterface $htmlClass */
             $htmlClass = $component->getHtmlClass();
             $role = $htmlClass::getHtmlRole();
+            $componentData = $component->jsonSerialize();
 
             if ($this->isHeader($role)) {
-                $header = Transform::toArray($component['header'] ??= []);
+                $header = Transform::toArray($componentData['header'] ??= []);
                 $this->header = (Header::createFromArray($header))->getHeader();
 
                 continue;
             }
 
             if ($this->isNavbar($role)) {
-                $this->navbar = $component->jsonSerialize();
+                $this->navbar = $componentData;
 
                 continue;
             }
 
             if ($this->isFooter($role)) {
-                $this->footer = $component->jsonSerialize();
+                $this->footer = $componentData;
 
                 continue;
             }
 
-            $mainComponents->set($uuid, $component->jsonSerialize());
+            $mainComponents->set($uuid, $componentData);
         }
     }
 

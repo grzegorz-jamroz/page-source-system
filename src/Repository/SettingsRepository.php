@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace PageSourceSystem\Repository;
@@ -28,6 +29,7 @@ class SettingsRepository
 
     /**
      * @return array<mixed, mixed>
+     *
      * @throws FileNotExists
      */
     public function getItemData(string $name): array

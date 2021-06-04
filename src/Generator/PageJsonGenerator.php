@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PageSourceSystem\Generator;
 
 use PageSourceSystem\Domain\Page;
-use PageSourceSystem\Generator\GeneratorInterface;
 use PageSourceSystem\Storage\ComponentInfoStorage;
 use PageSourceSystem\Storage\ComponentStorage;
 use PageSourceSystem\Storage\PageJsonStorage;

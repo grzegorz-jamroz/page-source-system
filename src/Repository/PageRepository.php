@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace PageSourceSystem\Repository;
@@ -10,7 +11,8 @@ use Ramsey\Uuid\Uuid;
 
 class PageRepository
 {
-    public function __construct(private SettingsRepository $settings) {
+    public function __construct(private SettingsRepository $settings)
+    {
     }
 
     public function getPage(string $uuid): Page
@@ -20,6 +22,9 @@ class PageRepository
         return Page::createFromArray($data);
     }
 
+    /**
+     * @return ArrayCollection<string, Page>
+     */
     public function getPages(): ArrayCollection
     {
         $pagesData = $this->getPagesData();
@@ -79,10 +84,10 @@ class PageRepository
             );
         }
 
-        $results = array_map(fn($result) => str_replace('.json', '', $result), $results);
+        $results = array_map(fn ($result) => str_replace('.json', '', $result), $results);
         $results = array_filter(
             $results,
-            fn($result) => Uuid::isValid($result)
+            fn ($result) => Uuid::isValid($result)
         );
 
         return array_values($results);
@@ -102,7 +107,6 @@ class PageRepository
 
                 return $storage;
             } catch (\Exception) {
-
             }
         }
 

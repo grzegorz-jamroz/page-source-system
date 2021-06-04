@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PageSourceSystem\Storage;
 
 use SimpleStorageSystem\Storage\AbstractJsonData;
-use SimpleStorageSystem\Storage\HtmlData;
 use SimpleStorageSystem\Utilities\Explorer;
 
 class PageJsonStorage extends AbstractJsonData
@@ -22,7 +21,7 @@ class PageJsonStorage extends AbstractJsonData
     {
         $directory = sprintf('%s/%s/json', $this->directory, $this->language);
         Explorer::createDirectoryIfNotExists($directory);
-        
+
         return sprintf(
             '%s/%s.json',
             $directory,

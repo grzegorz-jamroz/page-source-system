@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace PageSourceSystem\Repository;
@@ -18,13 +19,13 @@ class ComponentRepository
     }
 
     /**
-     * @param  array<string, mixed> $data
+     * @param array<string, mixed> $data
      */
     public function makeComponent(string $typename, array $data = []): ComponentInterface
     {
         $component = $this->components->get($typename);
 
-        if ($component === null) {
+        if (null === $component) {
             throw new \Exception(sprintf('Component with typename "%s" not exists.', $typename));
         }
 
@@ -34,7 +35,7 @@ class ComponentRepository
     public function getComponent(string $uuid): ComponentInterface
     {
         $data = $this->getComponentData($uuid);
-        $typename = Transform::toString($data['__typename'] ??= "");
+        $typename = Transform::toString($data['__typename'] ??= '');
 
         return $this->makeComponent($typename, $data);
     }
@@ -85,10 +86,10 @@ class ComponentRepository
             );
         }
 
-        $results = array_map(fn($result) => str_replace('.json', '', $result), $results);
+        $results = array_map(fn ($result) => str_replace('.json', '', $result), $results);
         $results = array_filter(
             $results,
-            fn($result) => Uuid::isValid($result)
+            fn ($result) => Uuid::isValid($result)
         );
 
         return array_values($results);
@@ -108,7 +109,6 @@ class ComponentRepository
 
                 return $storage;
             } catch (\Exception) {
-
             }
         }
 
