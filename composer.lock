@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "336c417bf49f3e631c34ee3b04d74ac6",
+    "content-hash": "31a3ffa64dd53d0b489fe8199476a423",
     "packages": [
         {
             "name": "brick/math",
@@ -133,16 +133,16 @@
         },
         {
             "name": "grzegorz-jamroz/html-creator",
-            "version": "0.0.4",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/grzegorz-jamroz/html-creator.git",
-                "reference": "e2c31a385fab6aa0c9b9357d0d945b2664088e9f"
+                "reference": "60188393e2405b055254c2d81f8130886f99f1ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/grzegorz-jamroz/html-creator/zipball/e2c31a385fab6aa0c9b9357d0d945b2664088e9f",
-                "reference": "e2c31a385fab6aa0c9b9357d0d945b2664088e9f",
+                "url": "https://api.github.com/repos/grzegorz-jamroz/html-creator/zipball/60188393e2405b055254c2d81f8130886f99f1ba",
+                "reference": "60188393e2405b055254c2d81f8130886f99f1ba",
                 "shasum": ""
             },
             "require": {
@@ -153,6 +153,7 @@
                 "friendsofphp/php-cs-fixer": "^2.18",
                 "phpstan/phpstan": "^0.12.78"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -163,9 +164,9 @@
             "description": "Library allow to generate html for React page readable by seo robots.",
             "support": {
                 "issues": "https://github.com/grzegorz-jamroz/html-creator/issues",
-                "source": "https://github.com/grzegorz-jamroz/html-creator/tree/0.0.4"
+                "source": "https://github.com/grzegorz-jamroz/html-creator/tree/master"
             },
-            "time": "2021-03-21T16:19:21+00:00"
+            "time": "2021-06-04T13:48:12+00:00"
         },
         {
             "name": "grzegorz-jamroz/page-source-components",
@@ -2650,6 +2651,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "grzegorz-jamroz/html-creator": 20,
         "grzegorz-jamroz/simple-storage-system": 20,
         "grzegorz-jamroz/page-source-components": 20
     },

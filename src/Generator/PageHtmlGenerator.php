@@ -6,13 +6,13 @@ namespace PageSourceSystem\Generator;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use HtmlCreator\ContentBuilder;
+use HtmlCreator\ElementInterface;
 use HtmlCreator\Helmet;
 use HtmlCreator\PageBuilder;
 use HtmlCreator\PageFactory;
-use PageSourceSystem\Domain\ComponentInfo;
 use PageSourceSystem\Domain\Header;
 use PageSourceSystem\Domain\Page;
-use PageSourceSystem\Storage\ComponentInfoStorage;
+use PageSourceSystem\Repository\ComponentRepository;
 use PageSourceSystem\Storage\ComponentStorage;
 use PageSourceSystem\Storage\PageHtmlStorage;
 use PageSourceSystem\Utility\Asset;
@@ -44,9 +44,9 @@ class PageHtmlGenerator implements GeneratorInterface
 
     public function __construct(
         private Page $page,
-        private ComponentInfoStorage $componentInfoStorage,
         private Asset $jsAsset,
         private Asset $cssAsset,
+        private ComponentRepository $componentRepository,
         private string $appDataDir,
         private string $appRenderDir,
     ) {
@@ -56,79 +56,32 @@ class PageHtmlGenerator implements GeneratorInterface
 
     public function generate(): void
     {
-        $language = $this->page->getLanguage();
-        $pageBuilder = new PageBuilder(
-            $language,
+        $this->storeHtml($this->getHtml());
+    }
+
+    private function getHtml(): string
+    {
+        return (new PageFactory($this->getPageBuilder()))->getHtml();
+    }
+
+    private function getPageBuilder(): PageBuilder
+    {
+        return new PageBuilder(
+            $this->page->getLanguage(),
             $this->jsAsset->getSrc(),
             $this->cssAsset->getSrc(),
             Helmet::createFromArray($this->seo),
             $this->getContentBuilder(),
         );
-        $html = (new PageFactory($pageBuilder))->getHtml();
+    }
+
+    private function storeHtml(string $html): void
+    {
         (new PageHtmlStorage(
             $this->appRenderDir,
-            $language,
+            $this->page->getLanguage(),
             $this->page->getUuid()
         ))->overwrite($html);
-    }
-
-    private function setElements(): void
-    {
-        $mainComponents = new ArrayCollection();
-        $pageComponents = $this->page->getComponents();
-        $language = $this->page->getLanguage();
-
-        foreach ($pageComponents as $uuid) {
-            $component = $this->getComponentData($language, $uuid);
-            $componentInfo = $this->componentInfoStorage->getComponentInfo($component);
-            $component['className'] = $componentInfo->getHtmlClass();
-
-            if ($this->isHeaderComponent($componentInfo) && !isset($this->header)) {
-                $header = Transform::toArray($component['header'] ??= []);
-                $this->header = (Header::createFromArray($header))->getHeader();
-            }
-
-            if ($this->isNavbarComponent($componentInfo) && !isset($this->navbar)) {
-                $this->navbar = $component;
-            }
-
-            if ($this->isFooterComponent($componentInfo) && !isset($this->footer)) {
-                $this->footer = $component;
-            }
-
-            if ($this->isMainComponent($componentInfo)) {
-                $component['htmlClass'] = $componentInfo->getHtmlClass();
-                $mainComponents->set($uuid, $component);
-            }
-        }
-
-        $this->mainComponents = $mainComponents->toArray();
-    }
-
-    private function isHeaderComponent(ComponentInfo $componentInfo): bool
-    {
-        return 'header' === $componentInfo->getType();
-    }
-
-    private function isNavbarComponent(ComponentInfo $componentInfo): bool
-    {
-        return 'navbar' === $componentInfo->getType();
-    }
-
-    private function isMainComponent(ComponentInfo $componentInfo): bool
-    {
-        if ('' === $componentInfo->getHtmlClass()) {
-            return false;
-        }
-
-        $mainTypes = ['header', 'section', 'article', 'aside', 'footer'];
-
-        return in_array($componentInfo->getType(), $mainTypes);
-    }
-
-    private function isFooterComponent(ComponentInfo $componentInfo): bool
-    {
-        return 'footer' === $componentInfo->getType();
     }
 
     private function getContentBuilder(): ContentBuilder
@@ -162,5 +115,54 @@ class PageHtmlGenerator implements GeneratorInterface
             $language,
             $uuid,
         ))->read();
+    }
+
+    private function setElements(): void
+    {
+        $mainComponents = new ArrayCollection();
+        $pageComponents = $this->page->getComponents();
+
+        foreach ($pageComponents as $uuid) {
+            $component = $this->componentRepository->getComponent($uuid);
+            /** @var ElementInterface $htmlClass */
+            $htmlClass = $component->getHtmlClass();
+            $role = $htmlClass::getHtmlRole();
+
+            if ($this->isHeader($role)) {
+                $header = Transform::toArray($component['header'] ??= []);
+                $this->header = (Header::createFromArray($header))->getHeader();
+
+                continue;
+            }
+
+            if ($this->isNavbar($role)) {
+                $this->navbar = $component->jsonSerialize();
+
+                continue;
+            }
+
+            if ($this->isFooter($role)) {
+                $this->footer = $component->jsonSerialize();
+
+                continue;
+            }
+
+            $mainComponents->set($uuid, $component->jsonSerialize());
+        }
+    }
+
+    private function isHeader(string $role): bool
+    {
+        return 'header' === $role && !isset($this->header);
+    }
+
+    private function isNavbar(string $role): bool
+    {
+        return 'navbar' === $role && !isset($this->navbar);
+    }
+
+    private function isFooter(string $role): bool
+    {
+        return 'footer' === $role && !isset($this->footer);
     }
 }

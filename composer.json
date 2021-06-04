@@ -4,7 +4,7 @@
   "require": {
     "php": ">=8",
     "doctrine/collections": "^1.6",
-    "grzegorz-jamroz/html-creator": "^0.0.4",
+    "grzegorz-jamroz/html-creator": "dev-master",
     "grzegorz-jamroz/simple-storage-system": "dev-master",
     "grzegorz-jamroz/plain-data-transformer": "^0.0.1",
     "grzegorz-jamroz/page-source-components": "dev-master",
