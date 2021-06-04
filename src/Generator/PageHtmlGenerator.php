@@ -112,6 +112,7 @@ class PageHtmlGenerator implements GeneratorInterface
             $htmlClass = $component->getHtmlClass();
             $role = $htmlClass::getHtmlRole();
             $componentData = $component->jsonSerialize();
+            $componentData['htmlClass'] = $component->getHtmlClass();
 
             if ($this->isHeader($role)) {
                 $header = Transform::toArray($componentData['header'] ??= []);
