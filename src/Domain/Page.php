@@ -9,6 +9,9 @@ use PlainDataTransformer\Transform;
 
 class Page implements \JsonSerializable, ArrayConstructable
 {
+    /**
+     * @param array<int, string> $components
+     */
     public function __construct(
         private string $uuid,
         private string $language,
@@ -44,6 +47,9 @@ class Page implements \JsonSerializable, ArrayConstructable
         return $this->seoUuid;
     }
 
+    /**
+     * @return array<int, string>
+     */
     public function getComponents(): array
     {
         return $this->components;
@@ -61,6 +67,9 @@ class Page implements \JsonSerializable, ArrayConstructable
         );
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function jsonSerialize(): array
     {
         return [
