@@ -37,7 +37,7 @@ class SettingsRepository
         return $this->getStorage($name)->read();
     }
 
-    private function getStorage(string $name): SettingsStorage
+    public function getStorage(string $name): SettingsStorage
     {
         return new SettingsStorage($this->directory, $name);
     }
