@@ -134,6 +134,8 @@ class PageHtmlGenerator implements GeneratorInterface
 
             $mainComponents->set($uuid, $componentData);
         }
+
+        $this->mainComponents = $mainComponents->toArray();
     }
 
     private function isHeader(string $role): bool
