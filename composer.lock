@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bf83b3789658ecd6a4bbfe94141975f9",
+    "content-hash": "336c417bf49f3e631c34ee3b04d74ac6",
     "packages": [
         {
             "name": "brick/math",
@@ -286,16 +286,16 @@
         },
         {
             "name": "grzegorz-jamroz/simple-storage-system",
-            "version": "0.0.6",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/grzegorz-jamroz/simple-storage-system.git",
-                "reference": "2d7997729c3961f0c57f34f4981e069b9907b97f"
+                "reference": "6d219bad9dad05ea297ade39aa9c3c1f8a55e96d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/grzegorz-jamroz/simple-storage-system/zipball/2d7997729c3961f0c57f34f4981e069b9907b97f",
-                "reference": "2d7997729c3961f0c57f34f4981e069b9907b97f",
+                "url": "https://api.github.com/repos/grzegorz-jamroz/simple-storage-system/zipball/6d219bad9dad05ea297ade39aa9c3c1f8a55e96d",
+                "reference": "6d219bad9dad05ea297ade39aa9c3c1f8a55e96d",
                 "shasum": ""
             },
             "require": {
@@ -305,6 +305,7 @@
                 "friendsofphp/php-cs-fixer": "^2.18",
                 "phpstan/phpstan": "^0.12.78"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -315,9 +316,9 @@
             "description": "Library contains interfaces and basic implementation of JSON storage.",
             "support": {
                 "issues": "https://github.com/grzegorz-jamroz/simple-storage-system/issues",
-                "source": "https://github.com/grzegorz-jamroz/simple-storage-system/tree/0.0.6"
+                "source": "https://github.com/grzegorz-jamroz/simple-storage-system/tree/master"
             },
-            "time": "2021-06-04T07:05:41+00:00"
+            "time": "2021-06-04T12:37:54+00:00"
         },
         {
             "name": "ramsey/collection",
@@ -2649,6 +2650,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "grzegorz-jamroz/simple-storage-system": 20,
         "grzegorz-jamroz/page-source-components": 20
     },
     "prefer-stable": false,

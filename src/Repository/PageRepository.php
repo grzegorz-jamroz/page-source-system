@@ -53,7 +53,7 @@ class PageRepository
      */
     public function getPageData(string $uuid): array
     {
-        return $this->getPageStorage($uuid)->getPageData();
+        return $this->getPageStorage($uuid)->getData();
     }
 
     public function deletePage(string $uuid): bool
@@ -98,7 +98,7 @@ class PageRepository
             );
 
             try {
-                $storage->getPageData();
+                $storage->getData();
 
                 return $storage;
             } catch (\Exception) {

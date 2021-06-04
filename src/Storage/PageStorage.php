@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace PageSourceSystem\Storage;
 
-use PageSourceSystem\Domain\Page;
-use SimpleStorageSystem\Document\Exception\FileNotExists;
 use SimpleStorageSystem\Storage\AbstractJsonData;
 use SimpleStorageSystem\Utilities\Explorer;
 
@@ -18,15 +16,6 @@ class PageStorage extends AbstractJsonData
     ) {
         $this->directory = self::getDirectory($directory, $language);
         parent::__construct($this->getFilename());
-    }
-
-    /**
-     * @return array<string, mixed>
-     * @throws FileNotExists
-     */
-    public function getPageData(): array
-    {
-        return $this->reader->read();
     }
 
     private function getFilename(): string

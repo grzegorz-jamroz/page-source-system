@@ -5,6 +5,7 @@ namespace PageSourceSystem\Repository;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PageSourceSystem\Storage\SettingsStorage;
+use SimpleStorageSystem\Document\Exception\FileNotExists;
 
 class SettingsRepository
 {
@@ -22,10 +23,19 @@ class SettingsRepository
      */
     public function getLanguages(): ArrayCollection
     {
-        return new ArrayCollection($this->getSettingsStorage('languages')->read());
+        return new ArrayCollection($this->getStorage('languages')->read());
     }
 
-    private function getSettingsStorage(string $name): SettingsStorage
+    /**
+     * @return array<mixed, mixed>
+     * @throws FileNotExists
+     */
+    public function getItemData(string $name): array
+    {
+        return $this->getStorage($name)->read();
+    }
+
+    private function getStorage(string $name): SettingsStorage
     {
         return new SettingsStorage($this->directory, $name);
     }

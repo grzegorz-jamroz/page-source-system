@@ -44,7 +44,7 @@ class ComponentRepository
      */
     public function getComponentData(string $uuid): array
     {
-        return $this->getComponentStorage($uuid)->getComponentData();
+        return $this->getComponentStorage($uuid)->getData();
     }
 
     public function deleteComponent(string $uuid): bool
@@ -104,7 +104,7 @@ class ComponentRepository
             );
 
             try {
-                $storage->getComponentData();
+                $storage->getData();
 
                 return $storage;
             } catch (\Exception) {
