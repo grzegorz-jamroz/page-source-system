@@ -74,4 +74,12 @@ class Page implements \JsonSerializable, ArrayConstructable
             'components' => $this->components,
         ];
     }
+
+    /**
+     * @return array<int, string>
+     */
+    public function getFields(): array
+    {
+        return array_keys($this->jsonSerialize());
+    }
 }
