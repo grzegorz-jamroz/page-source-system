@@ -46,7 +46,6 @@ class PageHtmlGenerator implements GeneratorInterface
         private Asset $jsAsset,
         private Asset $cssAsset,
         private ComponentRepository $componentRepository,
-        private string $appDataDir,
         private string $appRenderDir,
     ) {
         $this->setSeo();

@@ -5,16 +5,14 @@ declare(strict_types=1);
 namespace PageSourceSystem\Generator;
 
 use PageSourceSystem\Domain\Page;
-use PageSourceSystem\Storage\ComponentInfoStorage;
-use PageSourceSystem\Storage\ComponentStorage;
+use PageSourceSystem\Repository\ComponentRepository;
 use PageSourceSystem\Storage\PageJsonStorage;
 
 class PageJsonGenerator implements GeneratorInterface, \JsonSerializable
 {
     public function __construct(
         private Page $page,
-        private ComponentInfoStorage $componentInfoStorage,
-        private string $appDataDir,
+        private ComponentRepository $componentRepository,
         private string $appRenderDir,
     ) {
     }
@@ -33,8 +31,7 @@ class PageJsonGenerator implements GeneratorInterface, \JsonSerializable
      */
     private function getSeo(): array
     {
-        return $this->getComponentData(
-            $this->page->getLanguage(),
+        return $this->componentRepository->getComponentData(
             $this->page->getSeoUuid()
         );
     }
@@ -45,27 +42,12 @@ class PageJsonGenerator implements GeneratorInterface, \JsonSerializable
     private function getComponents(): array
     {
         $components = [];
-        $language = $this->page->getLanguage();
 
         foreach ($this->page->getComponents() as $uuid) {
-            $components[] = $this->getComponentData($language, $uuid);
+            $components[] = $this->componentRepository->getComponentData($uuid);
         }
 
         return $components;
-    }
-
-    /**
-     * @return array<string, mixed>
-     */
-    private function getComponentData(
-        string $language,
-        string $uuid
-    ): array {
-        return (new ComponentStorage(
-            $this->appDataDir,
-            $language,
-            $uuid,
-        ))->read();
     }
 
     /**
