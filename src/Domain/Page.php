@@ -67,7 +67,7 @@ class Page implements \JsonSerializable, ArrayConstructable
             Transform::toString($data['uuid'] ??= ''),
             Transform::toString($data['language'] ??= ''),
             Transform::toString($data['url'] ??= ''),
-            Transform::toString($data['internal_title'] ??= ''),
+            Transform::toString($data['internalTitle'] ??= ''),
             Transform::toString($data['header'] ??= ''),
             Transform::toString($data['seo']['uuid'] ??= ''),
             Transform::toArray($data['components'] ??= []),
@@ -83,7 +83,7 @@ class Page implements \JsonSerializable, ArrayConstructable
             'uuid' => $this->uuid,
             'language' => $this->language,
             'url' => $this->url,
-            'internal_title' => $this->internalTitle,
+            'internalTitle' => $this->internalTitle,
             'header' => $this->header,
             'seo' => [
                 'uuid' => $this->seoUuid,
