@@ -16,6 +16,7 @@ class Page implements \JsonSerializable, ArrayConstructable
         private string $uuid,
         private string $language,
         private string $url,
+        private string $internalTitle,
         private string $header,
         private string $seoUuid,
         private array $components,
@@ -35,6 +36,11 @@ class Page implements \JsonSerializable, ArrayConstructable
     public function getUrl(): string
     {
         return $this->url;
+    }
+
+    public function getInternalTitle(): string
+    {
+        return $this->internalTitle;
     }
 
     public function getHeader(): string
@@ -61,6 +67,7 @@ class Page implements \JsonSerializable, ArrayConstructable
             Transform::toString($data['uuid'] ??= ''),
             Transform::toString($data['language'] ??= ''),
             Transform::toString($data['url'] ??= ''),
+            Transform::toString($data['internal_title'] ??= ''),
             Transform::toString($data['header'] ??= ''),
             Transform::toString($data['seo']['uuid'] ??= ''),
             Transform::toArray($data['components'] ??= []),
@@ -76,6 +83,7 @@ class Page implements \JsonSerializable, ArrayConstructable
             'uuid' => $this->uuid,
             'language' => $this->language,
             'url' => $this->url,
+            'internal_title' => $this->internalTitle,
             'header' => $this->header,
             'seo' => [
                 'uuid' => $this->seoUuid,
