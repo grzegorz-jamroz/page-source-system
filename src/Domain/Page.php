@@ -10,7 +10,7 @@ use PlainDataTransformer\Transform;
 class Page implements \JsonSerializable, ArrayConstructable
 {
     /**
-     * @param array<int, string> $components
+     * @param array<int, array> $components
      */
     public function __construct(
         private string $uuid,
@@ -54,7 +54,7 @@ class Page implements \JsonSerializable, ArrayConstructable
     }
 
     /**
-     * @return array<int, string>
+     * @return array<int, array>
      */
     public function getComponents(): array
     {
