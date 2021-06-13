@@ -11,20 +11,22 @@ class ComponentMapper
 {
     /**
      * @param array<string, mixed> $component
+     *
      * @return array<string, mixed>
      */
     public static function getWithFieldsAllowedForRender(array $component): array
     {
         return array_filter(
             $component,
-            fn($value, $key) => !in_array($key, AbstractComponent::FIELDS_NOT_FOR_RENDER),
+            fn ($value, $key) => !in_array($key, AbstractComponent::FIELDS_NOT_FOR_RENDER),
             ARRAY_FILTER_USE_BOTH
         );
     }
 
     /**
      * @param array<mixed, array> $components
-     * @param array<int, string> $relations
+     * @param array<int, string>  $relations
+     *
      * @return array<int, array>
      */
     public static function getOptions(
@@ -33,7 +35,7 @@ class ComponentMapper
     ): array {
         $components = ArrayMapper::orderBy($components, '__typename');
 
-        if ($relations === []) {
+        if ([] === $relations) {
             return static::getAllComponentOptions($components);
         }
 
@@ -42,6 +44,7 @@ class ComponentMapper
 
     /**
      * @param array<mixed, array> $components
+     *
      * @return array<int, array>
      */
     private static function getAllComponentOptions(array $components): array
@@ -49,7 +52,7 @@ class ComponentMapper
         $output = [];
 
         foreach ($components as $component) {
-            if ($component['__typename'] === 'Seo') {
+            if ('Seo' === $component['__typename']) {
                 continue;
             }
 
@@ -61,7 +64,8 @@ class ComponentMapper
 
     /**
      * @param array<mixed, array> $components
-     * @param array<int, string> $relations
+     * @param array<int, string>  $relations
+     *
      * @return array<int, array>
      */
     private static function getOptionsForRelations(
@@ -85,6 +89,7 @@ class ComponentMapper
 
     /**
      * @param array<string, string> $component
+     *
      * @return array<string, string>
      */
     private static function getOptionsOutput(array $component): array
@@ -94,7 +99,7 @@ class ComponentMapper
         $typename = $component['__typename'] ?? '';
         $label = $internalTitle;
 
-        if ($label === '') {
+        if ('' === $label) {
             $label = $uuid;
         }
 
