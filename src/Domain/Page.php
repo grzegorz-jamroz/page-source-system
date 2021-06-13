@@ -9,7 +9,7 @@ use PlainDataTransformer\Transform;
 
 class Page implements \JsonSerializable, ArrayConstructable
 {
-    const TYPENAME = "Page";
+    const TYPENAME = 'Page';
 
     /**
      * @param array<int, array> $components

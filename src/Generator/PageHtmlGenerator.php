@@ -106,7 +106,8 @@ class PageHtmlGenerator implements GeneratorInterface
         $mainComponents = new ArrayCollection();
         $pageComponents = $this->page->getComponents();
 
-        foreach ($pageComponents as $uuid) {
+        foreach ($pageComponents as $component) {
+            $uuid = (string) $component['uuid'] ?? '';
             $component = $this->componentRepository->getComponent($uuid);
             /** @var ElementInterface $htmlClass */
             $htmlClass = $component->getHtmlClass();
