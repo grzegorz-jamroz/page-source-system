@@ -292,12 +292,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/grzegorz-jamroz/simple-storage-system.git",
-                "reference": "6d219bad9dad05ea297ade39aa9c3c1f8a55e96d"
+                "reference": "4fd0a1718be4879c65439e5f2c4f73a24939eb77"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/grzegorz-jamroz/simple-storage-system/zipball/6d219bad9dad05ea297ade39aa9c3c1f8a55e96d",
-                "reference": "6d219bad9dad05ea297ade39aa9c3c1f8a55e96d",
+                "url": "https://api.github.com/repos/grzegorz-jamroz/simple-storage-system/zipball/4fd0a1718be4879c65439e5f2c4f73a24939eb77",
+                "reference": "4fd0a1718be4879c65439e5f2c4f73a24939eb77",
                 "shasum": ""
             },
             "require": {
@@ -320,7 +320,7 @@
                 "issues": "https://github.com/grzegorz-jamroz/simple-storage-system/issues",
                 "source": "https://github.com/grzegorz-jamroz/simple-storage-system/tree/master"
             },
-            "time": "2021-06-04T12:37:54+00:00"
+            "time": "2021-06-13T15:51:07+00:00"
         },
         {
             "name": "ramsey/collection",
