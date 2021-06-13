@@ -7,12 +7,15 @@ namespace PageSourceSystem\Generator;
 use PageSourceSystem\Domain\Page;
 use PageSourceSystem\Repository\ComponentRepository;
 use PageSourceSystem\Storage\PageJsonStorage;
+use PageSourceSystem\Utility\Mapper\ComponentMapper;
+use PageSourceSystem\Utility\PageSeoDataTransformer;
 
 class PageJsonGenerator implements GeneratorInterface, \JsonSerializable
 {
     public function __construct(
         private Page $page,
         private ComponentRepository $componentRepository,
+        private PageSeoDataTransformer $pageSeoDataTransformer,
         private string $appRenderDir,
     ) {
     }
@@ -31,9 +34,11 @@ class PageJsonGenerator implements GeneratorInterface, \JsonSerializable
      */
     private function getSeo(): array
     {
-        return $this->componentRepository->getComponentData(
+        $seoData = $this->componentRepository->getComponentData(
             $this->page->getSeoUuid()
         );
+
+        return $this->pageSeoDataTransformer->getCombinedWithPrimarySeo($seoData);
     }
 
     /**
@@ -45,7 +50,8 @@ class PageJsonGenerator implements GeneratorInterface, \JsonSerializable
 
         foreach ($this->page->getComponents() as $component) {
             $uuid = (string) $component['uuid'] ?? '';
-            $components[] = $this->componentRepository->getComponentData($uuid);
+            $componentData = $this->componentRepository->getComponentData($uuid);
+            $components[] = ComponentMapper::getWithFieldsAllowedForRender($componentData);
         }
 
         return $components;

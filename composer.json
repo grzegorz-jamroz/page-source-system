@@ -8,6 +8,7 @@
     "grzegorz-jamroz/simple-storage-system": "dev-master",
     "grzegorz-jamroz/plain-data-transformer": "^0.0.1",
     "grzegorz-jamroz/page-source-components": "dev-master",
+    "grzegorz-jamroz/php-common": "dev-master",
     "ramsey/uuid": "^4.1"
   },
   "autoload": {

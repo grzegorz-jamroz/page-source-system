@@ -13,7 +13,7 @@ use Ramsey\Uuid\Uuid;
 class ComponentRepository
 {
     public function __construct(
-        private SettingsRepository $settings,
+        private SettingsRepository $settingsRepository,
         private ComponentCollection $components
     ) {
     }
@@ -75,9 +75,9 @@ class ComponentRepository
     {
         $results = [];
 
-        foreach ($this->settings->getLanguages() as $language) {
+        foreach ($this->settingsRepository->getLanguages() as $language) {
             $directory = ComponentStorage::getDirectory(
-                $this->settings->getDirectory(),
+                $this->settingsRepository->getDirectory(),
                 $language
             );
             $results = array_merge(
@@ -95,11 +95,21 @@ class ComponentRepository
         return array_values($results);
     }
 
+    /**
+     * @return array<string, mixed>
+     */
+    public function getPrimarySeoData(string $language): array
+    {
+        $uuid = $this->settingsRepository->getPrimarySeoUuid($language);
+
+        return $this->getComponentData($uuid);
+    }
+
     private function getComponentStorage(string $uuid): ComponentStorage
     {
-        foreach ($this->settings->getLanguages() as $language) {
+        foreach ($this->settingsRepository->getLanguages() as $language) {
             $storage = new ComponentStorage(
-                $this->settings->getDirectory(),
+                $this->settingsRepository->getDirectory(),
                 $language,
                 $uuid
             );

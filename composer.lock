@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "31a3ffa64dd53d0b489fe8199476a423",
+    "content-hash": "8bf5a0e164cacd04301fa3b6314a5c0d",
     "packages": [
         {
             "name": "brick/math",
@@ -137,12 +137,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/grzegorz-jamroz/html-creator.git",
-                "reference": "20b4762f0a5ae7bb48aa790c915c8a0dcef9b82b"
+                "reference": "d039d8554d7c37c00733945115c3380ff985fd96"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/grzegorz-jamroz/html-creator/zipball/20b4762f0a5ae7bb48aa790c915c8a0dcef9b82b",
-                "reference": "20b4762f0a5ae7bb48aa790c915c8a0dcef9b82b",
+                "url": "https://api.github.com/repos/grzegorz-jamroz/html-creator/zipball/d039d8554d7c37c00733945115c3380ff985fd96",
+                "reference": "d039d8554d7c37c00733945115c3380ff985fd96",
                 "shasum": ""
             },
             "require": {
@@ -166,7 +166,7 @@
                 "issues": "https://github.com/grzegorz-jamroz/html-creator/issues",
                 "source": "https://github.com/grzegorz-jamroz/html-creator/tree/master"
             },
-            "time": "2021-06-04T14:20:53+00:00"
+            "time": "2021-06-04T15:13:15+00:00"
         },
         {
             "name": "grzegorz-jamroz/page-source-components",
@@ -174,18 +174,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/grzegorz-jamroz/page-source-components.git",
-                "reference": "86b95797fa6c9dd075614cc4f69b62b6822518fb"
+                "reference": "775048a2a029664e47707119208b06e70c1ccb0d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/grzegorz-jamroz/page-source-components/zipball/86b95797fa6c9dd075614cc4f69b62b6822518fb",
-                "reference": "86b95797fa6c9dd075614cc4f69b62b6822518fb",
+                "url": "https://api.github.com/repos/grzegorz-jamroz/page-source-components/zipball/775048a2a029664e47707119208b06e70c1ccb0d",
+                "reference": "775048a2a029664e47707119208b06e70c1ccb0d",
                 "shasum": ""
             },
             "require": {
                 "doctrine/collections": "^1.6",
                 "ext-json": "*",
-                "grzegorz-jamroz/php-common": "^0.0.3"
+                "grzegorz-jamroz/php-common": "dev-master"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.0",
@@ -208,20 +208,20 @@
                 "issues": "https://github.com/grzegorz-jamroz/page-source-components/issues",
                 "source": "https://github.com/grzegorz-jamroz/page-source-components/tree/master"
             },
-            "time": "2021-06-02T19:31:38+00:00"
+            "time": "2021-06-13T12:16:53+00:00"
         },
         {
             "name": "grzegorz-jamroz/php-common",
-            "version": "0.0.3",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/grzegorz-jamroz/php-common.git",
-                "reference": "ae344efb051615850e1c9348c0714dcb35720577"
+                "reference": "f989cb157efd9208a248253b0d8ab820924dae05"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/grzegorz-jamroz/php-common/zipball/ae344efb051615850e1c9348c0714dcb35720577",
-                "reference": "ae344efb051615850e1c9348c0714dcb35720577",
+                "url": "https://api.github.com/repos/grzegorz-jamroz/php-common/zipball/f989cb157efd9208a248253b0d8ab820924dae05",
+                "reference": "f989cb157efd9208a248253b0d8ab820924dae05",
                 "shasum": ""
             },
             "require": {
@@ -232,6 +232,7 @@
                 "friendsofphp/php-cs-fixer": "^3.0",
                 "phpstan/phpstan": "^0.12.87"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -246,9 +247,9 @@
             "homepage": "https://rockujemy.pl",
             "support": {
                 "issues": "https://github.com/grzegorz-jamroz/php-common/issues",
-                "source": "https://github.com/grzegorz-jamroz/php-common/tree/0.0.3"
+                "source": "https://github.com/grzegorz-jamroz/php-common/tree/master"
             },
-            "time": "2021-05-18T20:22:45+00:00"
+            "time": "2021-06-13T12:44:43+00:00"
         },
         {
             "name": "grzegorz-jamroz/plain-data-transformer",
@@ -1034,16 +1035,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "0.12.88",
+            "version": "0.12.89",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "464d1a81af49409c41074aa6640ed0c4cbd9bb68"
+                "reference": "54c0f5a6c30511b77128d58b6369f718df250542"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/464d1a81af49409c41074aa6640ed0c4cbd9bb68",
-                "reference": "464d1a81af49409c41074aa6640ed0c4cbd9bb68",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/54c0f5a6c30511b77128d58b6369f718df250542",
+                "reference": "54c0f5a6c30511b77128d58b6369f718df250542",
                 "shasum": ""
             },
             "require": {
@@ -1074,11 +1075,15 @@
             "description": "PHPStan - PHP Static Analysis Tool",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan/issues",
-                "source": "https://github.com/phpstan/phpstan/tree/0.12.88"
+                "source": "https://github.com/phpstan/phpstan/tree/0.12.89"
             },
             "funding": [
                 {
                     "url": "https://github.com/ondrejmirtes",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/phpstan",
                     "type": "github"
                 },
                 {
@@ -1090,7 +1095,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-05-17T12:24:49+00:00"
+            "time": "2021-06-09T20:23:49+00:00"
         },
         {
             "name": "psr/cache",
@@ -2653,7 +2658,8 @@
     "stability-flags": {
         "grzegorz-jamroz/html-creator": 20,
         "grzegorz-jamroz/simple-storage-system": 20,
-        "grzegorz-jamroz/page-source-components": 20
+        "grzegorz-jamroz/page-source-components": 20,
+        "grzegorz-jamroz/php-common": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
