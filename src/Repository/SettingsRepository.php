@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace PageSourceSystem\Repository;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Ifrost\PageSourceComponents\SettingCollection;
+use Ifrost\PageSourceComponents\SettingInterface;
 use PageSourceSystem\Storage\SettingsStorage;
 
 class SettingsRepository
@@ -12,8 +14,24 @@ class SettingsRepository
     const SETTING_LANGUAGES = 'languages';
     const SETTING_PRIMARY_SEO = 'primary-seo';
 
-    public function __construct(private string $directory)
+    public function __construct(
+        private string $directory,
+        private SettingCollection $settings
+    ) {
+    }
+
+    /**
+     * @param array<string, mixed> $data
+     */
+    public function makeSetting(string $typename, array $data = []): SettingInterface
     {
+        $setting = $this->settings->get($typename);
+
+        if (null === $setting) {
+            throw new \Exception(sprintf('Setting with typename "%s" not exists.', $typename));
+        }
+
+        return $setting::createFromArray($data);
     }
 
     public function getDirectory(): string
