@@ -69,6 +69,6 @@ class SettingsRepository
 
     public function getStorage(string $name): SettingsStorage
     {
-        return new SettingsStorage($this->directory, $name);
+        return new SettingsStorage($name, $this->directory);
     }
 }
