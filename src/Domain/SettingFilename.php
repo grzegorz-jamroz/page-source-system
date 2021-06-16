@@ -5,7 +5,7 @@ namespace PageSourceSystem\Domain;
 
 use SimpleStorageSystem\Utilities\Explorer;
 
-class SettingFilename extends \Stringable
+class SettingFilename implements \Stringable
 {
     public function __construct(
         private string $setting,
