@@ -10,8 +10,8 @@ use SimpleStorageSystem\Utilities\Explorer;
 class SettingsStorage extends AbstractJsonData
 {
     public function __construct(
-        private string $directory,
         private string $fileName,
+        private string $directory,
     ) {
         $this->directory = self::getDirectory($directory);
         parent::__construct($this->getFilename());
