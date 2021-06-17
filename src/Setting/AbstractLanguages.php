@@ -7,6 +7,11 @@ use Ifrost\PageSourceComponents\AbstractSetting;
 
 abstract class AbstractLanguages extends AbstractSetting
 {
+    final public static function getTypename(): string
+    {
+        return "Languages";
+    }
+
     abstract public function getDefaultLanguage(): string;
 
     /**
