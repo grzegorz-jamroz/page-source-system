@@ -66,6 +66,11 @@ class SettingsRepository
         return $this->getStorage($typename)->getData();
     }
 
+    public function deleteSetting(string $typename): bool
+    {
+        return $this->getStorage($typename)->delete();
+    }
+
     public function getStorage(string $typename): SettingsStorage
     {
         return new SettingsStorage($typename, $this->directory);
