@@ -61,13 +61,13 @@ class SettingsRepository
         return $this->getSettingData(self::SETTING_PRIMARY_SEO)[$language];
     }
 
-    public function getSettingData(string $name): mixed
+    public function getSettingData(string $typename): mixed
     {
-        return $this->getStorage($name)->getData();
+        return $this->getStorage($typename)->getData();
     }
 
-    public function getStorage(string $name): SettingsStorage
+    public function getStorage(string $typename): SettingsStorage
     {
-        return new SettingsStorage($name, $this->directory);
+        return new SettingsStorage($typename, $this->directory);
     }
 }
