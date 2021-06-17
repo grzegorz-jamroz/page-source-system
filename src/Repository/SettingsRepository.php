@@ -7,6 +7,7 @@ namespace PageSourceSystem\Repository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Ifrost\PageSourceComponents\SettingCollection;
 use Ifrost\PageSourceComponents\SettingInterface;
+use PageSourceSystem\Setting\AbstractGeneral;
 use PageSourceSystem\Setting\AbstractLanguages;
 use PageSourceSystem\Storage\SettingsStorage;
 
@@ -39,6 +40,14 @@ class SettingsRepository
         return new ArrayCollection($setting->getSupportedLanguages());
     }
 
+    public function getPrimarySeoUuid(string $language): string
+    {
+        /** @var AbstractGeneral $setting */
+        $setting = $this->getSetting(AbstractGeneral::getTypename());
+
+        return $setting->getPrimarySeoUuid($language);
+    }
+
     /**
      * @param array<string, mixed> $data
      */
@@ -65,11 +74,6 @@ class SettingsRepository
     public function getDirectory(): string
     {
         return $this->directory;
-    }
-
-    public function getPrimarySeoUuid(string $language): string
-    {
-        return $this->getSettingData(self::SETTING_PRIMARY_SEO)[$language];
     }
 
     public function getSettingData(string $typename): mixed
