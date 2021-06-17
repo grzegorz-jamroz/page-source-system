@@ -63,12 +63,12 @@ class SettingsRepository
 
     public function getSettingData(string $typename): mixed
     {
-        return $this->getStorage($typename)->getData();
+        return $this->getSettingStorage($typename)->getData();
     }
 
     public function deleteSetting(string $typename): bool
     {
-        return $this->getStorage($typename)->delete();
+        return $this->getSettingStorage($typename)->delete();
     }
 
     /**
@@ -85,7 +85,7 @@ class SettingsRepository
         return $output;
     }
 
-    public function getStorage(string $typename): SettingsStorage
+    public function getSettingStorage(string $typename): SettingsStorage
     {
         return new SettingsStorage($typename, $this->directory);
     }
