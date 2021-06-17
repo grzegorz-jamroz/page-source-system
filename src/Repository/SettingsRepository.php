@@ -7,7 +7,7 @@ namespace PageSourceSystem\Repository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Ifrost\PageSourceComponents\SettingCollection;
 use Ifrost\PageSourceComponents\SettingInterface;
-use PageSourceSystem\Setting\AbstractLanguages;
+use PageSourceSystem\Setting\LanguagesSetting;
 use PageSourceSystem\Storage\SettingsStorage;
 
 class SettingsRepository
@@ -16,14 +16,14 @@ class SettingsRepository
 
     public function __construct(
         private string $directory,
-        private SettingCollection $settings
+        private SettingCollection $settings,
     ) {
     }
 
     public function getDefaultLanguage(): string
     {
-        /** @var AbstractLanguages $setting */
-        $setting = $this->getSetting(AbstractLanguages::getTypename());
+        /** @var LanguagesSetting $setting */
+        $setting = $this->getSetting('Languages');
 
         return $setting->getDefaultLanguage();
     }
@@ -33,8 +33,8 @@ class SettingsRepository
      */
     public function getSupportedLanguages(): ArrayCollection
     {
-        /** @var AbstractLanguages $setting */
-        $setting = $this->getSetting(AbstractLanguages::getTypename());
+        /** @var LanguagesSetting $setting */
+        $setting = $this->getSetting('Languages');
 
         return new ArrayCollection($setting->getSupportedLanguages());
     }
