@@ -24,7 +24,7 @@ class RenderedPageRepository
 
     private function getJsonPageStorage(string $uuid): PageJsonStorage
     {
-        foreach ($this->settingsRepository->getLanguages() as $language) {
+        foreach ($this->settingsRepository->getSupportedLanguages() as $language) {
             $storage = new PageJsonStorage(
                 sprintf('%s/pages', $this->settingsRepository->getDirectory()),
                 $language,
@@ -44,7 +44,7 @@ class RenderedPageRepository
 
     private function getHtmlPageStorage(string $uuid): PageHtmlStorage
     {
-        foreach ($this->settingsRepository->getLanguages() as $language) {
+        foreach ($this->settingsRepository->getSupportedLanguages() as $language) {
             $storage = new PageHtmlStorage(
                 sprintf('%s/pages', $this->settingsRepository->getDirectory()),
                 $language,

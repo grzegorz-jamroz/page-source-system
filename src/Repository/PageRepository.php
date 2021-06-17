@@ -11,7 +11,7 @@ use Ramsey\Uuid\Uuid;
 
 class PageRepository
 {
-    public function __construct(private SettingsRepository $settings)
+    public function __construct(private SettingsRepository $settingsRepository)
     {
     }
 
@@ -73,9 +73,9 @@ class PageRepository
     {
         $results = [];
 
-        foreach ($this->settings->getLanguages() as $language) {
+        foreach ($this->settingsRepository->getSupportedLanguages() as $language) {
             $directory = PageStorage::getDirectory(
-                $this->settings->getDirectory(),
+                $this->settingsRepository->getDirectory(),
                 $language
             );
             $results = array_merge(
@@ -95,9 +95,9 @@ class PageRepository
 
     private function getPageStorage(string $uuid): PageStorage
     {
-        foreach ($this->settings->getLanguages() as $language) {
+        foreach ($this->settingsRepository->getSupportedLanguages() as $language) {
             $storage = new PageStorage(
-                $this->settings->getDirectory(),
+                $this->settingsRepository->getDirectory(),
                 $language,
                 $uuid
             );

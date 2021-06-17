@@ -75,7 +75,7 @@ class ComponentRepository
     {
         $results = [];
 
-        foreach ($this->settingsRepository->getLanguages() as $language) {
+        foreach ($this->settingsRepository->getSupportedLanguages() as $language) {
             $directory = ComponentStorage::getDirectory(
                 $this->settingsRepository->getDirectory(),
                 $language
@@ -107,7 +107,7 @@ class ComponentRepository
 
     private function getComponentStorage(string $uuid): ComponentStorage
     {
-        foreach ($this->settingsRepository->getLanguages() as $language) {
+        foreach ($this->settingsRepository->getSupportedLanguages() as $language) {
             $storage = new ComponentStorage(
                 $this->settingsRepository->getDirectory(),
                 $language,
