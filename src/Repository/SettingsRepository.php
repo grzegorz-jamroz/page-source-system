@@ -71,6 +71,20 @@ class SettingsRepository
         return $this->getStorage($typename)->delete();
     }
 
+    /**
+     * @return array<string, array>
+     */
+    public function getSettingsData(): array
+    {
+        $output = [];
+
+        foreach ($this->settings as $typename => $settingClass) {
+            $output[$typename] = $this->getSettingData($typename);
+        }
+
+        return $output;
+    }
+
     public function getStorage(string $typename): SettingsStorage
     {
         return new SettingsStorage($typename, $this->directory);
