@@ -34,6 +34,14 @@ class SettingsRepository
         return $setting::createFromArray($data);
     }
 
+    public function getSetting(string $typename): SettingInterface
+    {
+        $data = $this->getSettingData($typename);
+
+        return $this->makeSetting($typename, $data);
+    }
+
+
     public function getDirectory(): string
     {
         return $this->directory;
@@ -44,25 +52,25 @@ class SettingsRepository
      */
     public function getLanguages(): ArrayCollection
     {
-        return new ArrayCollection($this->getItemData(self::SETTING_LANGUAGES));
+        return new ArrayCollection($this->getSettingData(self::SETTING_LANGUAGES));
     }
 
     public function getPrimarySeoUuid(string $language): string
     {
-        return $this->getItemData(self::SETTING_PRIMARY_SEO)[$language];
+        return $this->getSettingData(self::SETTING_PRIMARY_SEO)[$language];
     }
 
     /**
      * @return array<mixed, mixed>
      */
-    public function getItemSourceData(string $name): array
+    public function getSettingSourceData(string $name): array
     {
         return $this->getStorage($name)->read();
     }
 
-    public function getItemData(string $name): mixed
+    public function getSettingData(string $name): mixed
     {
-        $data = $this->getItemSourceData($name);
+        $data = $this->getSettingSourceData($name);
 
         return $data['data'] ?? null;
     }
