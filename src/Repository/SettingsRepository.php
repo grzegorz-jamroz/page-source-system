@@ -61,19 +61,9 @@ class SettingsRepository
         return $this->getSettingData(self::SETTING_PRIMARY_SEO)[$language];
     }
 
-    /**
-     * @return array<mixed, mixed>
-     */
-    public function getSettingSourceData(string $name): array
-    {
-        return $this->getStorage($name)->read();
-    }
-
     public function getSettingData(string $name): mixed
     {
-        $data = $this->getSettingSourceData($name);
-
-        return $data['data'] ?? null;
+        return $this->getStorage($name)->getData();
     }
 
     public function getStorage(string $name): SettingsStorage
