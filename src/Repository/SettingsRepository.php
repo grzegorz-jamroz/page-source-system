@@ -23,8 +23,10 @@ class SettingsRepository
     /**
      * @param array<string, mixed> $data
      */
-    public function makeSetting(string $typename, array $data = []): SettingInterface
-    {
+    public function makeSetting(
+        string $typename,
+        array $data = []
+    ): SettingInterface {
         $setting = $this->settings->get($typename);
 
         if (null === $setting) {
@@ -40,7 +42,6 @@ class SettingsRepository
 
         return $this->makeSetting($typename, $data);
     }
-
 
     public function getDirectory(): string
     {
