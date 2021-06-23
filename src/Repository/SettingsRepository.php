@@ -10,6 +10,7 @@ use Ifrost\PageSourceComponents\SettingInterface;
 use PageSourceSystem\Exception\SettingNotExists;
 use PageSourceSystem\Setting\AbstractGeneral;
 use PageSourceSystem\Setting\AbstractLanguages;
+use PageSourceSystem\Setting\BaseLanguages;
 use PageSourceSystem\Storage\SettingsStorage;
 use SimpleStorageSystem\Document\Exception\FileNotExists;
 
@@ -41,7 +42,7 @@ class SettingsRepository
             $setting = $this->getSetting(AbstractLanguages::getTypename());
         } catch (FileNotExists) {
             $this->getSettingStorage(AbstractLanguages::getTypename())->write(
-                AbstractLanguages::createDefault()->jsonSerialize()
+                (new BaseLanguages('en', ['en']))->jsonSerialize()
             );
             /** @var AbstractLanguages $setting */
             $setting = $this->getSetting(AbstractLanguages::getTypename());

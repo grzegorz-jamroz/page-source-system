@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace PageSourceSystem\Setting;
 
 use Ifrost\PageSourceComponents\AbstractSetting;
-use PlainDataTransformer\Transform;
 
-class AbstractLanguages extends AbstractSetting
+abstract class AbstractLanguages extends AbstractSetting
 {
     /**
      * @param array<int, string> $supportedLanguages
@@ -46,24 +45,5 @@ class AbstractLanguages extends AbstractSetting
             'defaultLanguage' => $this->defaultLanguage,
             'supportedLanguages' => $this->supportedLanguages,
         ];
-    }
-
-    /**
-     * @param array<string, mixed> $data
-     */
-    public static function createFromArray(array $data): self
-    {
-        return new self(
-            Transform::toString($data['defaultLanguage'] ??= ''),
-            Transform::toArray($data['supportedLanguages'] ??= []),
-        );
-    }
-
-    public static function createDefault(): self
-    {
-        return new self(
-            'en',
-            ['en'],
-        );
     }
 }
