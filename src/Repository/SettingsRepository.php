@@ -40,7 +40,7 @@ class SettingsRepository
         try {
             /** @var AbstractLanguages $setting */
             $setting = $this->getSetting(AbstractLanguages::getTypename());
-        } catch (SettingNotExists) {
+        } catch (FileNotExists) {
             $this->getSettingStorage(AbstractLanguages::getTypename())->write(
                 (new BaseLanguages('en', ['en']))->jsonSerialize()
             );
