@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace PageSourceSystem\Setting;
@@ -9,7 +10,7 @@ abstract class AbstractLanguages extends AbstractSetting
 {
     final public static function getTypename(): string
     {
-        return "Languages";
+        return 'Languages';
     }
 
     abstract public function getDefaultLanguage(): string;

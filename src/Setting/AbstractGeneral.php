@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace PageSourceSystem\Setting;
@@ -9,7 +10,7 @@ abstract class AbstractGeneral extends AbstractSetting
 {
     final public static function getTypename(): string
     {
-        return "General";
+        return 'General';
     }
 
     abstract public function getPrimarySeoUuid(string $language): string;

@@ -7,9 +7,11 @@ namespace PageSourceSystem\Repository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Ifrost\PageSourceComponents\SettingCollection;
 use Ifrost\PageSourceComponents\SettingInterface;
+use PageSourceSystem\Exception\SettingNotExists;
 use PageSourceSystem\Setting\AbstractGeneral;
 use PageSourceSystem\Setting\AbstractLanguages;
 use PageSourceSystem\Storage\SettingsStorage;
+use SimpleStorageSystem\Document\Exception\FileNotExists;
 
 class SettingsRepository
 {
@@ -58,12 +60,16 @@ class SettingsRepository
         $setting = $this->settings->get($typename);
 
         if (null === $setting) {
-            throw new \Exception(sprintf('Setting with typename "%s" not exists.', $typename));
+            throw new SettingNotExists(sprintf('Setting with typename "%s" not exists.', $typename));
         }
 
         return $setting::createFromArray($data);
     }
 
+    /**
+     * @throws FileNotExists
+     * @throws SettingNotExists
+     */
     public function getSetting(string $typename): SettingInterface
     {
         $data = $this->getSettingData($typename);
@@ -76,6 +82,9 @@ class SettingsRepository
         return $this->directory;
     }
 
+    /**
+     * @throws FileNotExists
+     */
     public function getSettingData(string $typename): mixed
     {
         return $this->getSettingStorage($typename)->getData();
