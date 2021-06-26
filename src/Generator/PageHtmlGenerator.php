@@ -15,6 +15,7 @@ use PageSourceSystem\Domain\Page;
 use PageSourceSystem\Repository\ComponentRepository;
 use PageSourceSystem\Storage\PageHtmlStorage;
 use PageSourceSystem\Utility\Asset;
+use PageSourceSystem\Utility\Mapper\ComponentMapper;
 use PlainDataTransformer\Transform;
 
 class PageHtmlGenerator implements GeneratorInterface
@@ -46,6 +47,7 @@ class PageHtmlGenerator implements GeneratorInterface
         private Asset $jsAsset,
         private Asset $cssAsset,
         private ComponentRepository $componentRepository,
+        private ComponentMapper $componentMapper,
         private string $appRenderDir,
     ) {
         $this->setSeo();
@@ -109,11 +111,12 @@ class PageHtmlGenerator implements GeneratorInterface
         foreach ($pageComponents as $component) {
             $uuid = (string) $component['uuid'] ?? '';
             $component = $this->componentRepository->getComponent($uuid);
+            $component = $this->componentMapper->getNestedComponents($component);
             /** @var ElementInterface $htmlClass */
             $htmlClass = $component->getHtmlClass();
             $role = $htmlClass::getHtmlRole();
             $componentData = $component->jsonSerialize();
-            $componentData['htmlClass'] = $component->getHtmlClass();
+            $componentData['htmlClass'] = $htmlClass;
 
             if ($this->isHeader($role)) {
                 $header = Transform::toArray($componentData['header'] ??= []);

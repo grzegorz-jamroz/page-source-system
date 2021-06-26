@@ -6,9 +6,34 @@ namespace PageSourceSystem\Utility\Mapper;
 
 use Ifrost\Common\ArrayMapper;
 use Ifrost\PageSourceComponents\AbstractComponent;
+use PageSourceSystem\Repository\ComponentRepository;
+use PlainDataTransformer\Transform;
 
 class ComponentMapper
 {
+    public function __construct(private ComponentRepository $componentRepository)
+    {
+    }
+
+    public function getNestedComponents(mixed $property): mixed
+    {
+        if (!is_array($property)) {
+            return $property;
+        }
+
+        return array_map(function(mixed $items) {
+            $uuid = Transform::toString($items['uuid'] ?? '');
+
+            if ($uuid !== '') {
+                $componentData = $this->componentRepository->getComponentData($uuid);
+
+                return ComponentMapper::getWithFieldsAllowedForRender($componentData);
+            }
+
+            return $this->getNestedComponents($items);
+        }, $property);
+    }
+
     /**
      * @param array<string, mixed> $component
      *
