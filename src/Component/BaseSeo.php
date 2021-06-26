@@ -15,7 +15,6 @@ class BaseSeo extends AbstractComponent
         '__typename',
         'language',
         'label',
-        'internalTitle',
     ];
 
     /**
