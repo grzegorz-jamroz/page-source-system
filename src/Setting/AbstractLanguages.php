@@ -10,10 +10,12 @@ abstract class AbstractLanguages extends AbstractSetting
 {
     /**
      * @param array<int, string> $supportedLanguages
+     * @param array<string, string> $supportedLanguagesOptions
      */
     public function __construct(
         protected string $defaultLanguage,
         protected array $supportedLanguages,
+        protected array $supportedLanguagesOptions,
     ) {
     }
 
@@ -44,6 +46,7 @@ abstract class AbstractLanguages extends AbstractSetting
             '__typename' => self::getTypename(),
             'defaultLanguage' => $this->defaultLanguage,
             'supportedLanguages' => $this->supportedLanguages,
+            'supportedLanguagesOptions' => $this->supportedLanguagesOptions,
         ];
     }
 }
