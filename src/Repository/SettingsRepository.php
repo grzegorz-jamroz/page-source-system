@@ -7,17 +7,18 @@ namespace PageSourceSystem\Repository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Ifrost\PageSourceComponents\SettingCollection;
 use Ifrost\PageSourceComponents\SettingInterface;
+use PageSourceSystem\Domain\Seo;
 use PageSourceSystem\Exception\SettingNotExists;
 use PageSourceSystem\Setting\AbstractGeneral;
 use PageSourceSystem\Setting\AbstractLanguages;
+use PageSourceSystem\Setting\BaseGeneral;
 use PageSourceSystem\Setting\BaseLanguages;
 use PageSourceSystem\Storage\SettingsStorage;
+use Ramsey\Uuid\Uuid;
 use SimpleStorageSystem\Document\Exception\FileNotExists;
 
 class SettingsRepository
 {
-    const SETTING_PRIMARY_SEO = 'primary-seo';
-
     public function __construct(
         private string $directory,
         private SettingCollection $settings,
@@ -26,8 +27,7 @@ class SettingsRepository
 
     public function getDefaultLanguage(): string
     {
-        /** @var AbstractLanguages $setting */
-        $setting = $this->getSetting(AbstractLanguages::getTypename());
+        $setting = $this->getLanguages();
 
         return $setting->getDefaultLanguage();
     }
@@ -37,16 +37,7 @@ class SettingsRepository
      */
     public function getSupportedLanguages(): ArrayCollection
     {
-        try {
-            /** @var AbstractLanguages $setting */
-            $setting = $this->getSetting(AbstractLanguages::getTypename());
-        } catch (FileNotExists) {
-            $this->getSettingStorage(AbstractLanguages::getTypename())->write(
-                (new BaseLanguages('en', ['en']))->jsonSerialize()
-            );
-            /** @var AbstractLanguages $setting */
-            $setting = $this->getSetting(AbstractLanguages::getTypename());
-        }
+        $setting = $this->getLanguages();
 
         return new ArrayCollection($setting->getSupportedLanguages());
     }
@@ -121,5 +112,45 @@ class SettingsRepository
     public function getSettingStorage(string $typename): SettingsStorage
     {
         return new SettingsStorage($typename, $this->directory);
+    }
+
+    protected function generateDefaultLanguages(): void
+    {
+        $this->getSettingStorage(AbstractLanguages::getTypename())->overwrite(
+            (new BaseLanguages('en', ['en']))->jsonSerialize()
+        );
+    }
+
+    protected function generateDefaultGeneral(): void
+    {
+        $primarySeo = [];
+
+        foreach ($this->getSupportedLanguages() as $language) {
+            $uuid = (string) Uuid::uuid4();
+            $primarySeo[$language] = $uuid;
+            $seo = Seo::createFromArray([
+                'uuid' => $uuid,
+                'language' => $language,
+            ]);
+        }
+
+        $this->getSettingStorage(AbstractGeneral::getTypename())->overwrite(
+            (new BaseGeneral($primarySeo))->jsonSerialize()
+        );
+    }
+
+    private function getLanguages(): AbstractLanguages
+    {
+        try {
+            /** @var AbstractLanguages $setting */
+            $setting = $this->getSetting(AbstractLanguages::getTypename());
+        } catch (FileNotExists) {
+            $this->generateDefaultLanguages();
+
+            /** @var AbstractLanguages $setting */
+            $setting = $this->getSetting(AbstractLanguages::getTypename());
+        }
+
+        return $setting;
     }
 }
