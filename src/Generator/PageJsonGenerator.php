@@ -50,7 +50,10 @@ class PageJsonGenerator implements GeneratorInterface, \JsonSerializable
         $components = [];
 
         foreach ($this->page->getComponents() as $component) {
-            $components[] = $this->componentMapper->getFilteredNestedComponents($component);
+            $uuid = (string) $component['uuid'] ?? '';
+            $componentData = $this->componentRepository->getComponentData($uuid);
+            $mappedComponent = ComponentMapper::getWithFieldsAllowedForRender($componentData);
+            $components[] = $this->componentMapper->getFilteredNestedComponents($mappedComponent);
         }
 
         return $components;
