@@ -15,7 +15,7 @@ class ComponentMapper
     {
     }
 
-    public function getNestedComponents(mixed $property): mixed
+    public function getFilteredNestedComponents(mixed $property): mixed
     {
         if (!is_array($property)) {
             return $property;
@@ -28,6 +28,27 @@ class ComponentMapper
                 $componentData = $this->componentRepository->getComponentData($uuid);
 
                 return ComponentMapper::getWithFieldsAllowedForRender($componentData);
+            }
+
+            return $this->getFilteredNestedComponents($items);
+        }, $property);
+    }
+
+    public function getNestedComponents(mixed $property): mixed
+    {
+        if (!is_array($property)) {
+            return $property;
+        }
+
+        return array_map(function(mixed $items) {
+            $uuid = Transform::toString($items['uuid'] ?? '');
+
+            if ($uuid !== '') {
+                $component = $this->componentRepository->getComponent($uuid);
+                $componentData = $component->jsonSerialize();
+                $componentData['htmlClass'] = $component->getHtmlClass();
+
+                return $componentData;
             }
 
             return $this->getNestedComponents($items);

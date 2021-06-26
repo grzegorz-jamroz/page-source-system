@@ -111,7 +111,6 @@ class PageHtmlGenerator implements GeneratorInterface
         foreach ($pageComponents as $component) {
             $uuid = (string) $component['uuid'] ?? '';
             $component = $this->componentRepository->getComponent($uuid);
-            $component = $this->componentMapper->getNestedComponents($component);
             /** @var ElementInterface $htmlClass */
             $htmlClass = $component->getHtmlClass();
             $role = $htmlClass::getHtmlRole();
@@ -137,7 +136,10 @@ class PageHtmlGenerator implements GeneratorInterface
                 continue;
             }
 
-            $mainComponents->set($uuid, $componentData);
+            $mainComponents->set(
+                $uuid,
+                $this->componentMapper->getNestedComponents($componentData)
+            );
         }
 
         $this->mainComponents = $mainComponents->toArray();
