@@ -48,6 +48,11 @@ class BaseSeo extends AbstractComponent
         parent::__construct($uuid, $language, $internalTitle);
     }
 
+    public static function getRelations(): array
+    {
+        return [];
+    }
+
     public static function getTypename(): string
     {
         return 'Seo';
@@ -58,9 +63,106 @@ class BaseSeo extends AbstractComponent
         return 'Seo';
     }
 
-    public static function getRelations(): array
+    public function getUuid(): string
     {
-        return [];
+        return $this->uuid;
+    }
+
+    public function getInternalTitle(): string
+    {
+        return $this->internalTitle;
+    }
+
+    public function getLanguage(): string
+    {
+        return $this->language;
+    }
+
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    public function getUrl(): string
+    {
+        return $this->url;
+    }
+
+    public function getModifiedTime(): string
+    {
+        return $this->modifiedTime;
+    }
+
+    public function getPageUrl(): string
+    {
+        return $this->pageUrl;
+    }
+
+    public function getThemeColor(): string
+    {
+        return $this->themeColor;
+    }
+
+    public function getImage(): string
+    {
+        return $this->image;
+    }
+
+    public function getMsapplicationTileImage(): string
+    {
+        return $this->msapplicationTileImage;
+    }
+
+    public function getSitemap(): string
+    {
+        return $this->sitemap;
+    }
+
+    public function getManifest(): string
+    {
+        return $this->manifest;
+    }
+
+    public function getFavicon(): string
+    {
+        return $this->favicon;
+    }
+
+    /**
+     * @return array<int, array>
+     */
+    public function getOgImages(): array
+    {
+        return $this->ogImages;
+    }
+
+    /**
+     * @return array<int, array>
+     */
+    public function getIcons(): array
+    {
+        return $this->icons;
+    }
+
+    /**
+     * @return array<int, array>
+     */
+    public function getAppleTouchIcons(): array
+    {
+        return $this->appleTouchIcons;
+    }
+
+    /**
+     * @return array<int, array>
+     */
+    public function getAppleTouchPrecomposedIcons(): array
+    {
+        return $this->appleTouchPrecomposedIcons;
     }
 
     /**
