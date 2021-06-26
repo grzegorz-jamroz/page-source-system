@@ -16,6 +16,7 @@ class BaseLanguages extends AbstractLanguages
         return new self(
             Transform::toString($data['defaultLanguage'] ??= ''),
             Transform::toArray($data['supportedLanguages'] ??= []),
+            Transform::toArray($data['supportedLanguagesOptions'] ??= []),
         );
     }
 }
