@@ -9,6 +9,7 @@ use PageSourceSystem\Repository\ComponentRepository;
 use PageSourceSystem\Storage\PageJsonStorage;
 use PageSourceSystem\Utility\Mapper\ComponentMapper;
 use PageSourceSystem\Utility\PageSeoDataTransformer;
+use PlainDataTransformer\Transform;
 
 class PageJsonGenerator implements GeneratorInterface, \JsonSerializable
 {
@@ -51,10 +52,33 @@ class PageJsonGenerator implements GeneratorInterface, \JsonSerializable
         foreach ($this->page->getComponents() as $component) {
             $uuid = (string) $component['uuid'] ?? '';
             $componentData = $this->componentRepository->getComponentData($uuid);
-            $components[] = ComponentMapper::getWithFieldsAllowedForRender($componentData);
+            $mappedComponent = ComponentMapper::getWithFieldsAllowedForRender($componentData);
+            $components[] = $this->getNestedComponents($mappedComponent);
         }
 
         return $components;
+    }
+
+    /**
+     * @return array<int, array>
+     */
+    private function getNestedComponents(mixed $property): mixed
+    {
+        if (!is_array($property)) {
+            return $property;
+        }
+
+        return array_map(function(mixed $items) {
+            $uuid = Transform::toString($items['uuid'] ?? '');
+
+            if ($uuid !== '') {
+                $componentData = $this->componentRepository->getComponentData($uuid);
+
+                return ComponentMapper::getWithFieldsAllowedForRender($componentData);
+            }
+
+            return $this->getNestedComponents($items);
+        }, $property);
     }
 
     /**
