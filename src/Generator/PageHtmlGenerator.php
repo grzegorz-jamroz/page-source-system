@@ -125,7 +125,7 @@ class PageHtmlGenerator implements GeneratorInterface
             }
 
             if ($this->isNavbar($role)) {
-                $this->navbar = $componentData;
+                $this->navbar = $this->componentMapper->getNestedComponents($componentData);
 
                 continue;
             }
