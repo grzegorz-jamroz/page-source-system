@@ -23,7 +23,7 @@ abstract class AbstractGeneral extends AbstractSetting
 
     public function getPrimarySeoUuid(string $language): string
     {
-        return $this->primarySeo[$language] ??= "";
+        return $this->primarySeo[$language] ??= '';
     }
 
     /**

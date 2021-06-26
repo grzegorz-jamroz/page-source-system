@@ -35,8 +35,7 @@ class Seo implements ArrayConstructable
         private array $icons,
         private array $appleTouchIcons,
         private array $appleTouchPrecomposedIcons,
-    )
-    {
+    ) {
     }
 
     public function getUuid(): string
@@ -79,9 +78,6 @@ class Seo implements ArrayConstructable
         return $this->themeColor;
     }
 
-    /**
-     * @return string
-     */
     public function getImage(): string
     {
         return $this->image;
