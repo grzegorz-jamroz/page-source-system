@@ -104,6 +104,10 @@ class SettingsRepository
         return new SettingsStorage($typename, $this->directory);
     }
 
+    /**
+     * @throws FileNotExists
+     * @throws SettingNotExists
+     */
     public function getLanguages(): AbstractLanguages
     {
         /** @var AbstractLanguages $setting */
@@ -112,6 +116,10 @@ class SettingsRepository
         return $setting;
     }
 
+    /**
+     * @throws FileNotExists
+     * @throws SettingNotExists
+     */
     public function getGeneral(): AbstractGeneral
     {
         /** @var AbstractGeneral $setting */
