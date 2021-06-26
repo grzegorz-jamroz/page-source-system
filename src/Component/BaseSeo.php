@@ -98,7 +98,7 @@ class BaseSeo extends AbstractComponent
         return Helmet::class;
     }
 
-    public static function createFromArray(array $data): static
+    public static function createFromArray(array $data): self
     {
         return new self(
             Transform::toString($data['uuid'] ??= ""),
