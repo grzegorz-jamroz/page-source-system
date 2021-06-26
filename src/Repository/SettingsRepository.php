@@ -104,14 +104,7 @@ class SettingsRepository
         return new SettingsStorage($typename, $this->directory);
     }
 
-    protected function generateDefaultLanguages(): void
-    {
-        $this->getSettingStorage(AbstractLanguages::getTypename())->overwrite(
-            (new BaseLanguages('en', ['en']))->jsonSerialize()
-        );
-    }
-
-    private function getLanguages(): AbstractLanguages
+    public function getLanguages(): AbstractLanguages
     {
         /** @var AbstractLanguages $setting */
         $setting = $this->getSetting(AbstractLanguages::getTypename());
@@ -119,7 +112,7 @@ class SettingsRepository
         return $setting;
     }
 
-    private function getGeneral(): AbstractGeneral
+    public function getGeneral(): AbstractGeneral
     {
         /** @var AbstractGeneral $setting */
         $setting = $this->getSetting(AbstractGeneral::getTypename());
