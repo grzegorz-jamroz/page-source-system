@@ -152,7 +152,6 @@ class ComponentMapper
         return [
             'value' => $uuid,
             'label' => $label,
-            'uuid' => $uuid,
             '__typename' => $typename,
             'internalTitle' => $internalTitle,
             'labelName' => $component['label'] ?? '',
