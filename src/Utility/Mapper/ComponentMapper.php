@@ -71,21 +71,28 @@ class ComponentMapper
 
     /**
      * @param array<mixed, array> $components
-     * @param array<int, string>  $relations
+     * @param array<string, array> $filters
      *
      * @return array<int, array>
      */
     public static function getOptions(
         array $components,
-        array $relations = [],
+        array $filters,
     ): array {
+        $relations = Transform::toArray($filters['relations'] ?? []);
+        $typenames = Transform::toArray($filters['typenames'] ?? []);
         $components = ArrayMapper::orderBy($components, '__typename');
 
-        if ([] === $relations) {
+        if ($relations === [] && $typenames === []) {
             return static::getAllComponentOptions($components);
         }
 
-        return static::getOptionsForRelations($components, $relations);
+        return array_values(
+            array_merge(
+                static::getOptionsForRelations($components, $relations),
+                static::getOptionsForTypenames($components, $typenames)
+            )
+        );
     }
 
     /**
@@ -112,7 +119,7 @@ class ComponentMapper
      * @param array<mixed, array> $components
      * @param array<int, string>  $relations
      *
-     * @return array<int, array>
+     * @return array<string, array>
      */
     private static function getOptionsForRelations(
         array $components,
@@ -122,11 +129,46 @@ class ComponentMapper
 
         foreach ($relations as $relation) {
             foreach ($components as $component) {
-                if (!in_array($relation, $component['relations'] ?? [])) {
+                $componentRelations = Transform::toArray($component['relations'] ?? []);
+                $uuid = Transform::toString($component['uuid'] ?? '');
+
+                if ($uuid === '' || !in_array($relation, $componentRelations)) {
                     continue;
                 }
 
-                $output[] = static::getOptionsOutput($component);
+                $output[$uuid] = static::getOptionsOutput($component);
+            }
+        }
+
+        return $output;
+    }
+
+    /**
+     * @param array<mixed, array> $components
+     * @param array<int, string>  $typenames
+     *
+     * @return array<string, array>
+     */
+    private static function getOptionsForTypenames(
+        array $components,
+        array $typenames,
+    ): array {
+        $output = [];
+
+        foreach ($typenames as $typename) {
+            foreach ($components as $component) {
+                $componentTypename = Transform::toString($component['__typename'] ?? '');
+                $uuid = Transform::toString($component['uuid'] ?? '');
+
+                if (
+                    $componentTypename === ''
+                    || $uuid === ''
+                    || $typename !== $componentTypename
+                ) {
+                    continue;
+                }
+
+                $output[$uuid] = static::getOptionsOutput($component);
             }
         }
 
