@@ -17,6 +17,11 @@ class UserRepository
     ) {
     }
 
+    public function getDirectory(): string
+    {
+        return $this->directory;
+    }
+
     public function getUser(string $uuid): AbstractUser
     {
         try {
