@@ -68,7 +68,12 @@ class UserRepository
         return array_values($results);
     }
 
-    protected function getUserStorage(string $uuid): UserStorage
+    public function deleteUser(string $uuid): bool
+    {
+        return $this->getUserStorage($uuid)->delete();
+    }
+
+    private function getUserStorage(string $uuid): UserStorage
     {
         $storage = new UserStorage(
             $this->directory,
