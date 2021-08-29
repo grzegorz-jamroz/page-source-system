@@ -21,6 +21,39 @@ abstract class AbstractUser implements ArrayConstructable, \JsonSerializable
     ) {
     }
 
+    public function getUuid(): string
+    {
+        return $this->uuid;
+    }
+
+    public function getUsername(): string
+    {
+        return $this->username;
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    /**
+     * @return array<int, string>
+     */
+    public function getRoles(): array
+    {
+        return $this->roles;
+    }
+
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    public function getApiKey(): string
+    {
+        return $this->apiKey;
+    }
+
     /**
      * @return array<string, mixed>
      */
