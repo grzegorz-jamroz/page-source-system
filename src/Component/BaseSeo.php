@@ -10,7 +10,7 @@ use PlainDataTransformer\Transform;
 
 class BaseSeo extends AbstractComponent
 {
-    const NOT_EDITABLE_FIELDS = [
+    public const NOT_EDITABLE_FIELDS = [
         'uuid',
         '__typename',
         'language',
@@ -42,8 +42,7 @@ class BaseSeo extends AbstractComponent
         private array $icons,
         private array $appleTouchIcons,
         private array $appleTouchPrecomposedIcons,
-    )
-    {
+    ) {
         parent::__construct($uuid, $language, $internalTitle);
     }
 
@@ -202,9 +201,9 @@ class BaseSeo extends AbstractComponent
     public static function createFromArray(array $data): self
     {
         return new self(
-            Transform::toString($data['uuid'] ??= ""),
-            Transform::toString($data['language'] ??= ""),
-            Transform::toString($data['internalTitle'] ??= ""),
+            Transform::toString($data['uuid'] ??= ''),
+            Transform::toString($data['language'] ??= ''),
+            Transform::toString($data['internalTitle'] ??= ''),
             Transform::toString($data['title'] ??= ''),
             Transform::toString($data['description'] ??= ''),
             Transform::toString($data['url'] ??= ''),

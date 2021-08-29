@@ -8,7 +8,8 @@
     "grzegorz-jamroz/simple-storage-system": "dev-master",
     "grzegorz-jamroz/plain-data-transformer": "dev-master",
     "grzegorz-jamroz/page-source-components": "dev-master",
-    "grzegorz-jamroz/php-common": "dev-master"
+    "grzegorz-jamroz/php-common": "dev-master",
+    "ramsey/uuid": "^4.2"
   },
   "autoload": {
     "psr-4": {
@@ -16,7 +17,7 @@
     }
   },
   "require-dev": {
-    "friendsofphp/php-cs-fixer": "^2.18",
-    "phpstan/phpstan": "^0.12.78"
+    "friendsofphp/php-cs-fixer": "^3.0",
+    "phpstan/phpstan": "^0.12.79"
   }
 }

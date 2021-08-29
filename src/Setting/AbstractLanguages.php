@@ -10,7 +10,7 @@ abstract class AbstractLanguages extends AbstractSetting
 {
     /**
      * @param array<int, string> $supportedLanguages
-     * @param array<int, array> $supportedLanguagesOptions
+     * @param array<int, array>  $supportedLanguagesOptions
      */
     public function __construct(
         protected string $defaultLanguage,

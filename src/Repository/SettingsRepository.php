@@ -10,7 +10,6 @@ use Ifrost\PageSourceComponents\SettingInterface;
 use PageSourceSystem\Exception\SettingNotExists;
 use PageSourceSystem\Setting\AbstractGeneral;
 use PageSourceSystem\Setting\AbstractLanguages;
-use PageSourceSystem\Setting\BaseLanguages;
 use PageSourceSystem\Storage\SettingsStorage;
 use SimpleStorageSystem\Document\Exception\FileNotExists;
 

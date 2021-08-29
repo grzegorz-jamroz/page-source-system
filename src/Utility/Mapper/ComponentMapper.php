@@ -21,10 +21,10 @@ class ComponentMapper
             return $property;
         }
 
-        return array_map(function(mixed $items) {
+        return array_map(function (mixed $items) {
             $uuid = Transform::toString($items['uuid'] ?? '');
 
-            if ($uuid !== '') {
+            if ('' !== $uuid) {
                 $componentData = $this->componentRepository->getComponentData($uuid);
 
                 return ComponentMapper::getWithFieldsAllowedForRender($componentData);
@@ -40,10 +40,10 @@ class ComponentMapper
             return $property;
         }
 
-        return array_map(function(mixed $items) {
+        return array_map(function (mixed $items) {
             $uuid = Transform::toString($items['uuid'] ?? '');
 
-            if ($uuid !== '') {
+            if ('' !== $uuid) {
                 $component = $this->componentRepository->getComponent($uuid);
                 $componentData = $component->jsonSerialize();
                 $componentData['htmlClass'] = $component->getHtmlClass();
@@ -70,7 +70,7 @@ class ComponentMapper
     }
 
     /**
-     * @param array<mixed, array> $components
+     * @param array<mixed, array>  $components
      * @param array<string, array> $filters
      *
      * @return array<int, array>
@@ -83,7 +83,7 @@ class ComponentMapper
         $typenames = Transform::toArray($filters['typenames'] ?? []);
         $components = ArrayMapper::orderBy($components, '__typename');
 
-        if ($relations === [] && $typenames === []) {
+        if ([] === $relations && [] === $typenames) {
             return static::getAllComponentOptions($components);
         }
 
@@ -132,7 +132,7 @@ class ComponentMapper
                 $componentRelations = Transform::toArray($component['relations'] ?? []);
                 $uuid = Transform::toString($component['uuid'] ?? '');
 
-                if ($uuid === '' || !in_array($relation, $componentRelations)) {
+                if ('' === $uuid || !in_array($relation, $componentRelations)) {
                     continue;
                 }
 
@@ -161,8 +161,8 @@ class ComponentMapper
                 $uuid = Transform::toString($component['uuid'] ?? '');
 
                 if (
-                    $componentTypename === ''
-                    || $uuid === ''
+                    '' === $componentTypename
+                    || '' === $uuid
                     || $typename !== $componentTypename
                 ) {
                     continue;
