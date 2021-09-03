@@ -33,6 +33,28 @@ class UserRepository
         return $this->userFactory->create($data);
     }
 
+    public function getUserByEmail(string $email): AbstractUser
+    {
+        foreach ($this->getUsers() as $user) {
+            if ($user->getEmail() === $email) {
+                return $user;
+            }
+        }
+
+        throw new \Exception(sprintf('User with email "%s" not exists.', $email));
+    }
+
+    public function getUserByResetPasswordToken(string $token): AbstractUser
+    {
+        foreach ($this->getUsers() as $user) {
+            if ($user->getResetPasswordToken() === $token) {
+                return $user;
+            }
+        }
+
+        throw new \Exception(sprintf('User with reset password token "%s" not exists.', $token));
+    }
+
     /**
      * @return array<string, AbstractUser>
      */
