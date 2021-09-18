@@ -6,6 +6,7 @@ namespace PageSourceSystem\Repository;
 
 use Ifrost\PageSourceComponents\ComponentCollection;
 use Ifrost\PageSourceComponents\ComponentInterface;
+use PageSourceSystem\Exception\ComponentNotExists;
 use PageSourceSystem\Storage\ComponentStorage;
 use PlainDataTransformer\Transform;
 use Ramsey\Uuid\Uuid;
@@ -26,7 +27,7 @@ class ComponentRepository
         $component = $this->components->get($typename);
 
         if (null === $component) {
-            throw new \Exception(sprintf('Component with typename "%s" not exists.', $typename));
+            throw new ComponentNotExists($typename);
         }
 
         return $component::createFromArray($data);
