@@ -10,11 +10,11 @@ use PageSourceSystem\Exception\ComponentNotExists;
 use PageSourceSystem\Repository\ComponentRepository;
 use PageSourceSystem\Repository\SettingsRepository;
 use PHPStan\Testing\TestCase;
-use Prophecy\Prophecy\ObjectProphecy;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ComponentRepositoryTest extends TestCase
 {
-    private SettingsRepository|ObjectProphecy $settingsRepositoryMock;
+    private SettingsRepository|MockObject $settingsRepositoryMock;
 
     protected function setUp(): void
     {
