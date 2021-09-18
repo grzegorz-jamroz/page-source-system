@@ -8,7 +8,7 @@ use Throwable;
 
 class AssetNotExists extends \Exception
 {
-    public function __construct(string $path, $code = 0, Throwable $previous = null)
+    public function __construct(string $path, int $code = 0, Throwable $previous = null)
     {
         $message = sprintf('Unable to find Asset under path "%s"', $path);
         parent::__construct($message, $code, $previous);
