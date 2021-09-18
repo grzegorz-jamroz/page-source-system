@@ -18,6 +18,7 @@ abstract class AbstractUser implements ArrayConstructable, \JsonSerializable
         protected array $roles,
         protected string $password,
         protected string $apiKey,
+        protected string $resetPasswordToken,
     ) {
     }
 
@@ -52,6 +53,11 @@ abstract class AbstractUser implements ArrayConstructable, \JsonSerializable
     public function getApiKey(): string
     {
         return $this->apiKey;
+    }
+
+    public function getResetPasswordToken(): string
+    {
+        return $this->resetPasswordToken;
     }
 
     /**

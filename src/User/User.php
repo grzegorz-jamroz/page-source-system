@@ -15,6 +15,7 @@ class User extends AbstractUser
         protected array $roles,
         protected string $password,
         protected string $apiKey,
+        protected string $resetPasswordToken,
         protected string $name,
         protected string $surname,
     ) {
@@ -24,7 +25,8 @@ class User extends AbstractUser
             $email,
             $roles,
             $password,
-            $apiKey
+            $apiKey,
+            $resetPasswordToken,
         );
     }
 
@@ -64,6 +66,7 @@ class User extends AbstractUser
             Transform::toArray($data['roles'] ?? []),
             Transform::toString($data['password'] ?? ''),
             Transform::toString($data['apiKey'] ?? ''),
+            Transform::toString($data['resetPasswordToken'] ?? ''),
             Transform::toString($data['name'] ?? ''),
             Transform::toString($data['surname'] ?? ''),
         );
