@@ -4,28 +4,50 @@ declare(strict_types=1);
 
 namespace PageSourceSystem\Utility;
 
+use PageSourceSystem\Exception\AssetNotExists;
+
 class Asset
 {
+    private string $directory;
+    private string $path;
+
     public function __construct(
-        private string $entryDirectory,
+        string $projectDirectory,
         private string $entryName,
         private string $extension,
-        private string $entrypointName = 'public'
+        private string $entryPath = '',
+        string $entrypointName = 'public'
     ) {
-        $this->entrypointName = sprintf('%s/%s', $entryDirectory, $this->entrypointName);
+        $this->setDirectory($projectDirectory, $entrypointName);
+        $this->entryName = trim($this->entryName, '/');
+        $this->extension = trim($this->extension, '/');
+        $this->entryPath = trim($this->entryPath, '/');
+        $this->path = sprintf('%s/%s*.%s', $this->directory, $this->entryName, $this->extension);
     }
 
     public function getSrc(): string
     {
-        $path = sprintf('%s/%s*.%s', $this->entrypointName, $this->entryName, $this->extension);
-        $pathames = glob($path);
+        $pathames = glob($this->path);
 
-        if (false === $pathames) {
-            throw new \Exception(sprintf('Unable to find path %s', $path));
+        if ($pathames === false || $pathames === []) {
+            throw new AssetNotExists($this->getSrcPath($this->path));
         }
 
-        $path = $pathames[0] ?? sprintf('%s/%s.%s', $this->entrypointName, $this->entryName, $this->extension);
+        return $this->getSrcPath($pathames[0]);
+    }
 
-        return str_replace($this->entrypointName, '', $path);
+    private function setDirectory(
+        string $projectDirectory,
+        string $entrypointName,
+    ): void {
+        $entrypointName = trim($entrypointName, '/');
+        $directory = sprintf('%s/%s/%s', $projectDirectory, $entrypointName, $this->entryPath);
+        $directory = preg_replace('~/{2,}~', '/', $directory) ?? $directory;
+        $this->directory = rtrim($directory, '/');
+    }
+
+    private function getSrcPath(string $path): string
+    {
+        return sprintf('/%s%s', $this->entryPath, str_replace($this->directory, '', $path));
     }
 }

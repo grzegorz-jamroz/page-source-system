@@ -9,11 +9,17 @@
     "grzegorz-jamroz/plain-data-transformer": "dev-master",
     "grzegorz-jamroz/page-source-components": "dev-master",
     "grzegorz-jamroz/php-common": "dev-master",
-    "ramsey/uuid": "^4.2"
+    "ramsey/uuid": "^4.2",
+    "phpunit/phpunit": "^9.5"
   },
   "autoload": {
     "psr-4": {
       "PageSourceSystem\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
     }
   },
   "require-dev": {
